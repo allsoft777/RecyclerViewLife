@@ -14,28 +14,23 @@
  * limitations under the License.
  */
 
-package com.seongil.recyclerviewlib.sample.transaction.adapter;
+package com.seongil.recyclerviewlib.mock;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 
-import com.seongil.recyclerviewlib.single.RecyclerListViewAdapter;
-import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
-
-import java.util.ArrayList;
+import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
 
 /**
- * @author seongil2.kim
- * @since: 17. 1. 16
+ * @author seong-il, kim
+ * @since: 17. 1. 17
  */
-public class TransactionListAdapter extends RecyclerListViewAdapter {
+public class TestViewBinder3 extends TestBaseViewBinder {
 
     // ========================================================================
     // constants
     // ========================================================================
-    private static final int VIEW_TYPE_TRANSACTION = 1;
-    private static final int VIEW_TYPE_ADVERTISEMENT = 2;
 
     // ========================================================================
     // fields
@@ -44,14 +39,12 @@ public class TransactionListAdapter extends RecyclerListViewAdapter {
     // ========================================================================
     // constructors
     // ========================================================================
-    public TransactionListAdapter(
-        @NonNull LayoutInflater layoutInflater,
-        @Nullable AbstractViewBinder.RecyclerViewItemClickListener viewItemClickListener) {
-        super(layoutInflater);
-        setDataSet(new ArrayList());
-
-        addViewBinder(new TransactionViewBinder(VIEW_TYPE_TRANSACTION, layoutInflater, viewItemClickListener));
-        addViewBinder(new TransactionAdvertisementViewBinder(VIEW_TYPE_ADVERTISEMENT, layoutInflater, viewItemClickListener));
+    public TestViewBinder3(
+            int viewType,
+            @NonNull LayoutInflater inflater,
+            @Nullable RecyclerViewItemClickListener itemClickListener,
+            @Nullable RecyclerViewItemLongClickListener itemLongClickListener) {
+        super(viewType, inflater, itemClickListener, itemLongClickListener);
     }
 
     // ========================================================================
@@ -61,6 +54,10 @@ public class TransactionListAdapter extends RecyclerListViewAdapter {
     // ========================================================================
     // methods for/from superclass/interfaces
     // ========================================================================
+    @Override
+    public boolean isForViewType(@NonNull RecyclerViewItem item) {
+        return item instanceof TestRecyclerViewItem3;
+    }
 
     // ========================================================================
     // methods

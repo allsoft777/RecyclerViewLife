@@ -14,28 +14,25 @@
  * limitations under the License.
  */
 
-package com.seongil.recyclerviewlib.sample.transaction.adapter;
+package com.seongil.recyclerviewlib.mock;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 
-import com.seongil.recyclerviewlib.single.RecyclerListViewAdapter;
-import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
+import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
+import com.seongil.recyclerviewlib.single.AbstractRecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author seongil2.kim
- * @since: 17. 1. 16
+ * @author seong-il, kim
+ * @since: 17. 1. 17
  */
-public class TransactionListAdapter extends RecyclerListViewAdapter {
+public class MockRecyclerViewAdapterSimple extends AbstractRecyclerViewAdapter<RecyclerViewItem> {
 
     // ========================================================================
     // constants
     // ========================================================================
-    private static final int VIEW_TYPE_TRANSACTION = 1;
-    private static final int VIEW_TYPE_ADVERTISEMENT = 2;
 
     // ========================================================================
     // fields
@@ -44,14 +41,13 @@ public class TransactionListAdapter extends RecyclerListViewAdapter {
     // ========================================================================
     // constructors
     // ========================================================================
-    public TransactionListAdapter(
-        @NonNull LayoutInflater layoutInflater,
-        @Nullable AbstractViewBinder.RecyclerViewItemClickListener viewItemClickListener) {
+    public MockRecyclerViewAdapterSimple(LayoutInflater layoutInflater, TestViewBinder1 binder1) {
         super(layoutInflater);
-        setDataSet(new ArrayList());
+        List<RecyclerViewItem> items = new ArrayList<>();
+        setDataSet(items);
 
-        addViewBinder(new TransactionViewBinder(VIEW_TYPE_TRANSACTION, layoutInflater, viewItemClickListener));
-        addViewBinder(new TransactionAdvertisementViewBinder(VIEW_TYPE_ADVERTISEMENT, layoutInflater, viewItemClickListener));
+        setNotifyObservers(false);
+        addViewBinder(binder1);
     }
 
     // ========================================================================
@@ -61,6 +57,25 @@ public class TransactionListAdapter extends RecyclerListViewAdapter {
     // ========================================================================
     // methods for/from superclass/interfaces
     // ========================================================================
+    @Override
+    public boolean registeredFooterView() {
+        return false;
+    }
+
+    @Override
+    public boolean registeredHeaderView() {
+        return false;
+    }
+
+    @Override
+    public boolean loadFooterItemsMore() {
+        return false;
+    }
+
+    @Override
+    public boolean loadHeaderItemsMore() {
+        return false;
+    }
 
     // ========================================================================
     // methods

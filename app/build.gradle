@@ -151,4 +151,5 @@ dependencies {
     testCompile(testDependencies.robolectricShadowsHttpClient) {
         exclude group: 'org.robolectric', module: 'robolectric'
     }
+
 }

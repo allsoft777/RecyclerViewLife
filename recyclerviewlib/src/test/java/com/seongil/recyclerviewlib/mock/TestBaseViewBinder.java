@@ -14,28 +14,25 @@
  * limitations under the License.
  */
 
-package com.seongil.recyclerviewlib.sample.transaction.adapter;
+package com.seongil.recyclerviewlib.mock;
 
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
 import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
-import com.seongil.recyclerviewlib.sample.R;
-import com.seongil.recyclerviewlib.sample.model.TransactionAdvertisement;
+
+import java.lang.reflect.Field;
 
 /**
- * @author seongil2.kim
- * @since: 17. 1. 16
+ * @author seong-il, kim
+ * @since: 17. 1. 17
  */
-public class TransactionAdvertisementViewBinder extends AbstractViewBinder {
+public abstract class TestBaseViewBinder extends AbstractViewBinder {
 
     // ========================================================================
     // constants
@@ -44,15 +41,33 @@ public class TransactionAdvertisementViewBinder extends AbstractViewBinder {
     // ========================================================================
     // fields
     // ========================================================================
+    public boolean onCreateViewHolderCalled = false;
+    public boolean onBindViewHolderCalled = false;
+
+    public RecyclerView.ViewHolder viewHolder;
 
     // ========================================================================
     // constructors
     // ========================================================================
-    public TransactionAdvertisementViewBinder(
-        int viewType,
-        @NonNull LayoutInflater inflater,
-        @NonNull RecyclerViewItemClickListener itemClickListener) {
-        super(viewType, inflater, itemClickListener);
+    public TestBaseViewBinder(
+            int viewType,
+            @NonNull LayoutInflater inflater,
+            @Nullable RecyclerViewItemClickListener itemClickListener,
+            @Nullable RecyclerViewItemLongClickListener itemLongClickListener) {
+        super(viewType, inflater, itemClickListener, itemLongClickListener);
+
+        viewHolder = new RecyclerView.ViewHolder(new View(null)) {
+        };
+
+        try {
+            Field viewTypeField = RecyclerView.ViewHolder.class.
+                    getDeclaredField("mItemViewType");
+
+            viewTypeField.setAccessible(true);
+            viewTypeField.set(viewHolder, viewType);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // ========================================================================
@@ -62,49 +77,27 @@ public class TransactionAdvertisementViewBinder extends AbstractViewBinder {
     // ========================================================================
     // methods for/from superclass/interfaces
     // ========================================================================
-    @Override
-    public boolean isForViewType(@NonNull RecyclerViewItem item) {
-        return item instanceof TransactionAdvertisement;
-    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
-        return new TransactionAdvertisementItemViewHolder(
-            mLayoutInflater.inflate(R.layout.list_item_advertisement_type, parent, false));
+        onCreateViewHolderCalled = true;
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewItem item,
-                                 @NonNull final RecyclerView.ViewHolder holder) {
-        final TransactionAdvertisement data = (TransactionAdvertisement) item;
-        final TransactionAdvertisementItemViewHolder viewHolder = (TransactionAdvertisementItemViewHolder) holder;
-        final Resources res = viewHolder.itemView.getResources();
-        viewHolder.name.setText(data.getAdvertisementName());
-        Glide
-            .with(viewHolder.itemView.getContext())
-            .fromResource()
-            .load(data.getThumbnailId())
-            .into(viewHolder.imageview);
-        holder.itemView.setOnClickListener(v -> mItemViewClickListener.onClickedRecyclerViewItem(holder, data, holder.getLayoutPosition()));
+    public void onBindViewHolder(@NonNull RecyclerViewItem item, @NonNull RecyclerView.ViewHolder holder) {
+        onBindViewHolderCalled = true;
     }
 
     // ========================================================================
     // methods
     // ========================================================================
+    public void reset() {
+        onCreateViewHolderCalled = false;
+        onBindViewHolderCalled = false;
+    }
 
     // ========================================================================
     // inner and anonymous classes
     // ========================================================================
-    public static class TransactionAdvertisementItemViewHolder extends RecyclerView.ViewHolder {
-
-        public final TextView name;
-        public final ImageView imageview;
-
-        public TransactionAdvertisementItemViewHolder(View view) {
-            super(view);
-            name = (TextView) view.findViewById(R.id.name);
-            imageview = (ImageView) view.findViewById(R.id.thumbnail);
-        }
-    }
 }

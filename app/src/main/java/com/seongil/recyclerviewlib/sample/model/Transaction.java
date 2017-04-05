@@ -16,7 +16,7 @@
 
 package com.seongil.recyclerviewlib.sample.model;
 
-import com.seongil.recyclerviewlib.lib.model.common.RecyclerViewItem;
+import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
 
 /**
  * @author seongil2.kim

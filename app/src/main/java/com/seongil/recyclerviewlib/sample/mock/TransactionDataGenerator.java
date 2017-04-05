@@ -1,6 +1,6 @@
 package com.seongil.recyclerviewlib.sample.mock;
 
-import com.seongil.recyclerviewlib.lib.model.common.RecyclerViewItem;
+import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
 import com.seongil.recyclerviewlib.sample.R;
 import com.seongil.recyclerviewlib.sample.model.Transaction;
 import com.seongil.recyclerviewlib.sample.model.TransactionAdvertisement;

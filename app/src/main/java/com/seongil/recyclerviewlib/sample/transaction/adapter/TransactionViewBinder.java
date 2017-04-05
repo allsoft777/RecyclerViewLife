@@ -24,8 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.seongil.recyclerviewlib.lib.model.common.RecyclerViewItem;
-import com.seongil.recyclerviewlib.lib.single.viewbinder.AbstractViewBinder;
+import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
+import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
 import com.seongil.recyclerviewlib.sample.R;
 import com.seongil.recyclerviewlib.sample.model.Transaction;
 import com.seongil.recyclerviewlib.sample.utils.RxFormatObservables;

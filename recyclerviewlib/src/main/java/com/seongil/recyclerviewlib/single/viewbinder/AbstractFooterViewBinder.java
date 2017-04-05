@@ -14,59 +14,48 @@
  * limitations under the License.
  */
 
-package com.seongil.recyclerviewlib.sample.transaction.adapter;
+package com.seongil.recyclerviewlib.single.viewbinder;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 
-import com.seongil.recyclerviewlib.single.RecyclerListViewAdapter;
-import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
-
-import java.util.ArrayList;
-
 /**
- * @author seongil2.kim
- * @since: 17. 1. 16
+ * @author seong-il, kim
+ * @since 17. 3. 21
  */
-public class TransactionListAdapter extends RecyclerListViewAdapter {
+public abstract class AbstractFooterViewBinder extends AbstractViewBinder {
 
     // ========================================================================
-    // constants
-    // ========================================================================
-    private static final int VIEW_TYPE_TRANSACTION = 1;
-    private static final int VIEW_TYPE_ADVERTISEMENT = 2;
-
-    // ========================================================================
-    // fields
+    // Constants
     // ========================================================================
 
     // ========================================================================
-    // constructors
+    // Fields
     // ========================================================================
-    public TransactionListAdapter(
-        @NonNull LayoutInflater layoutInflater,
-        @Nullable AbstractViewBinder.RecyclerViewItemClickListener viewItemClickListener) {
-        super(layoutInflater);
-        setDataSet(new ArrayList());
 
-        addViewBinder(new TransactionViewBinder(VIEW_TYPE_TRANSACTION, layoutInflater, viewItemClickListener));
-        addViewBinder(new TransactionAdvertisementViewBinder(VIEW_TYPE_ADVERTISEMENT, layoutInflater, viewItemClickListener));
+    // ========================================================================
+    // Constructors
+    // ========================================================================
+    public AbstractFooterViewBinder(
+        @NonNull LayoutInflater inflater,
+        @Nullable RecyclerViewItemClickListener viewItemClickListener) {
+        super(RECYCLER_FOOTER_VIEW_TYPE, inflater, viewItemClickListener);
     }
 
     // ========================================================================
-    // getter & setter
+    // Getter & Setter
     // ========================================================================
 
     // ========================================================================
-    // methods for/from superclass/interfaces
+    // Methods for/from SuperClass/Interfaces
     // ========================================================================
 
     // ========================================================================
-    // methods
+    // Methods
     // ========================================================================
 
     // ========================================================================
-    // inner and anonymous classes
+    // Inner and Anonymous Classes
     // ========================================================================
 }

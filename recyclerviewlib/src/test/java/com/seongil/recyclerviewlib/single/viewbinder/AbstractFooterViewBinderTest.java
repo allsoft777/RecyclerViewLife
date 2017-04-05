@@ -14,45 +14,36 @@
  * limitations under the License.
  */
 
-package com.seongil.recyclerviewlib.sample.transaction.adapter;
+package com.seongil.recyclerviewlib.single.viewbinder;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 
-import com.seongil.recyclerviewlib.single.RecyclerListViewAdapter;
-import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
+import com.seongil.recyclerviewlib.mock.TestFooterViewBinder;
 
-import java.util.ArrayList;
+import junit.framework.Assert;
+
+import org.junit.Test;
+import org.mockito.Mock;
 
 /**
- * @author seongil2.kim
- * @since: 17. 1. 16
+ * @author seong-il, kim
+ * @since: 17. 1. 17
  */
-public class TransactionListAdapter extends RecyclerListViewAdapter {
+public class AbstractFooterViewBinderTest {
 
     // ========================================================================
     // constants
     // ========================================================================
-    private static final int VIEW_TYPE_TRANSACTION = 1;
-    private static final int VIEW_TYPE_ADVERTISEMENT = 2;
 
     // ========================================================================
     // fields
     // ========================================================================
+    @Mock
+    LayoutInflater layoutInflater;
 
     // ========================================================================
     // constructors
     // ========================================================================
-    public TransactionListAdapter(
-        @NonNull LayoutInflater layoutInflater,
-        @Nullable AbstractViewBinder.RecyclerViewItemClickListener viewItemClickListener) {
-        super(layoutInflater);
-        setDataSet(new ArrayList());
-
-        addViewBinder(new TransactionViewBinder(VIEW_TYPE_TRANSACTION, layoutInflater, viewItemClickListener));
-        addViewBinder(new TransactionAdvertisementViewBinder(VIEW_TYPE_ADVERTISEMENT, layoutInflater, viewItemClickListener));
-    }
 
     // ========================================================================
     // getter & setter
@@ -65,6 +56,20 @@ public class TransactionListAdapter extends RecyclerListViewAdapter {
     // ========================================================================
     // methods
     // ========================================================================
+    @Test
+    public void testFooterViewBinder() {
+
+        ViewBinderListManager mgr = new ViewBinderListManager();
+        TestFooterViewBinder fvb = new TestFooterViewBinder(layoutInflater, null);
+        mgr.addViewBinder(fvb);
+
+        AbstractViewBinder avb = (AbstractViewBinder) mgr.getViewBinderList()
+                .get(AbstractViewBinder.RECYCLER_FOOTER_VIEW_TYPE);
+
+        Assert.assertEquals(avb, fvb);
+        Assert.assertEquals(AbstractViewBinder.RECYCLER_FOOTER_VIEW_TYPE, fvb.getItemViewType());
+        Assert.assertNull(fvb.getClickListener());
+    }
 
     // ========================================================================
     // inner and anonymous classes
