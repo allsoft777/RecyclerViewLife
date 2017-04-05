@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RecyclerView-Library</string>
+    <string name="transaction_list">Transaction List</string>
+    <string name="no_items">No items</string>
+</resources>

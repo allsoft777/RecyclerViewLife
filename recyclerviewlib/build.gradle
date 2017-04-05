@@ -1,0 +1,141 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'com.android.library'
+
+apply plugin: 'findbugs'
+task findbugs(type: FindBugs) {
+    ignoreFailures = true
+    classes = files("$project.buildDir/intermediates/classes/")
+    classpath = files()
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    excludeFilter = file(rootDir.path + "/buildsystem/ci/findbugs_exclude.xml")
+
+    effort = 'max'
+    reportLevel = "high"
+
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
+}
+
+apply plugin: 'pmd'
+task pmd(type: Pmd) {
+    ignoreFailures = true
+    ruleSetFiles = files(rootDir.path + "/buildsystem/ci/pmd_ruleset.xml")
+    ruleSets = []
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = true
+        html.enabled = false
+    }
+}
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
+        versionCode VERSION_CODE_LIB as int
+        versionName VERSION_NAME_LIB
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        libraryVariants.all { variant ->
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                if (outputFile != null && outputFile.name.endsWith('.aar')) {
+                    def fileName = "${archivesBaseName}-${android.defaultConfig.versionName}.aar"
+                    output.outputFile = new File(outputFile.parent, fileName)
+                }
+            }
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        def options = rootProject.ext.lintoptions
+
+        quiet options.quiet
+        abortOnError options.abortOnError
+        ignoreWarnings options.ignorewarnings
+        checkAllWarnings options.checkAllWarnings
+        checkReleaseBuilds options.checkReleaseBuilds
+        noLines options.noLines
+        showAll options.showAll
+        lintConfig file(rootDir.path + "/buildsystem/ci/lint.xml")
+        htmlReport options.htmlReport
+        xmlReport options.xmlReport
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    /**
+     * Google Library
+     */
+    def googleDependencies = rootProject.ext.googleDependencies
+    compile googleDependencies.supportV4
+    compile googleDependencies.annotation
+    compile(googleDependencies.appCompatV7) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+    compile googleDependencies.recyclerview
+
+    /**
+     * Library
+     */
+    def libraryDependencies = rootProject.ext.libraryDependencies
+    compile libraryDependencies.rxJava
+
+    /**
+     * Test Dependency
+     */
+    def testDependencies = rootProject.ext.testDependencies
+    testCompile(testDependencies.junit) {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
+    testCompile(testDependencies.mockito) {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
+    testCompile(testDependencies.powermockJunit) {
+        exclude group: 'junit', module: 'junit'
+    }
+    testCompile(testDependencies.robolectric) {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    testCompile testDependencies.hamcrest
+    testCompile testDependencies.powermockMockito
+    testCompile(testDependencies.robolectricShadowsHttpClient) {
+        exclude group: 'org.robolectric', module: 'robolectric'
+    }
+}
