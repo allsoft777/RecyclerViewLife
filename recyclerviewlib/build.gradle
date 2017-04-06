@@ -1,20 +1,23 @@
-/*
- * Copyright (C) 2017 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+buildscript {
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.4.15"
+    }
+}
 
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: "com.jfrog.artifactory"
+
+group = GROUP
+String bintrayUser = System.getenv('BINTRAY_USER')
+String bintrayKey = System.getenv('BINTRAY_API_KEY')
+
+boolean isReleaseBuild = gradle.startParameter.taskNames.contains('bintrayUpload')
+version = isReleaseBuild ? VERSION_NAME : "$VERSION_NAME-SNAPSHOT"
+logger.info("RecyclerView Library version=$project.version")
 
 apply plugin: 'findbugs'
 task findbugs(type: FindBugs) {
@@ -57,8 +60,8 @@ android {
     defaultConfig {
         minSdkVersion MIN_SDK_VERSION as int
         targetSdkVersion TARGET_SDK_VERSION as int
-        versionCode VERSION_CODE_LIB as int
-        versionName VERSION_NAME_LIB
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -139,3 +142,81 @@ dependencies {
         exclude group: 'org.robolectric', module: 'robolectric'
     }
 }
+
+// Create source/javadoc artifacts for publishing
+apply from: "$rootDir/gradle/artifacts.gradle"
+
+// Configure android-maven-gradle-plugin
+install {
+    repositories.mavenInstaller.pom.project {
+        name POM_NAME
+        description POM_DESCRIPTION
+        packaging POM_PACKAGING
+        url POM_URL
+
+        licenses {
+            license {
+                name POM_LICENCE_NAME
+                url POM_LICENCE_URL
+                distribution POM_LICENCE_DIST
+            }
+        }
+
+        scm {
+            url POM_SCM_URL
+            connection POM_SCM_CONNECTION
+            developerConnection POM_SCM_DEV_CONNECTION
+        }
+
+        developers {
+            developer {
+                id POM_DEVELOPER_ID
+                name POM_DEVELOPER_NAME
+            }
+        }
+    }
+}
+
+// Configure artifactory (for publishing snapshots)
+// Based on NebulaOJOPublishingPlugin (from nebula-bintray-plugin)
+artifactory {
+    contextUrl = 'https://oss.jfrog.org'
+
+    publish {
+        repository {
+            repoKey = 'oss-snapshot-local'
+
+            username = bintrayUser
+            password = bintrayKey
+        }
+
+        defaults {
+            publishConfigs('archives')
+        }
+    }
+}
+
+// Configure gradle-bintray-plugin (for publishing releases)
+bintray {
+    configurations = ['archives']
+    publish = true
+    override = true
+
+    pkg {
+        repo = 'maven'
+        name = POM_NAME
+        licenses = ['Apache-2.0']
+        labels = ['recyclerview', 'listview', 'android']
+        websiteUrl = POM_URL
+        issueTrackerUrl = POM_URL_ISSUE
+        vcsUrl = POM_VCS_URL
+    }
+}
+
+bintray.user = bintrayUser
+bintray.key = bintrayKey
+
+def sync = bintray.pkg.version.mavenCentralSync
+sync.sync = true
+sync.user = bintrayUser
+sync.password = bintrayKey
