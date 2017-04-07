@@ -61,8 +61,8 @@ public class RecyclerViewBindersManager<T> {
         final int viewType = viewBinder.getItemViewType();
         if (mViewBinderList.get(viewType) != null) {
             throw new IllegalArgumentException(
-                "Given ViewBinder is already added in the list. ViewType : "
-                    + viewType + ". Already registered ViewBinder type is " + mViewBinderList.get(viewType));
+                  "Given ViewBinder is already added in the list. ViewType : "
+                        + viewType + ". Already registered ViewBinder type is " + mViewBinderList.get(viewType));
         }
 
         mViewBinderList.put(viewType, viewBinder);
@@ -81,7 +81,7 @@ public class RecyclerViewBindersManager<T> {
 
         final StringBuilder logger = new StringBuilder(256);
         logger.append("There is no RecyclerViewBinder in the list.\nSize of mViewBinderList : ")
-            .append(delegatesCount).append("\nitem list\n");
+              .append(delegatesCount).append("\nitem list\n");
         for (int i = 0; i < delegatesCount; i++) {
             logger.append("view type : ");
             logger.append(mViewBinderList.get(i) != null ? mViewBinderList.get(i).getItemViewType() : "null");

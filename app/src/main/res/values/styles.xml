@@ -7,25 +7,63 @@
         <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:theme">@style/ToolbarActionBar</item>
     </style>
 
-    <style name="ListItem_Common_Primary_TextStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:includeFontPadding">false</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">16dp</item>
+    <style name="ToolbarActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/foreground1</item>
     </style>
 
-    <style name="ListItem_Common_Secondary_TextStyle">
+    <style name="ListItem_Primary_TextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:textColor">@color/listitem_primary_text_color</item>
         <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="ListItem_Secondary_TextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12dp</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/listitem_secondary_text_color</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="RadioButton_Common">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ChooseDialog_Subject_TextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/dialog_option_text_label_text_size</item>
+        <item name="android:textColor">@color/foreground2</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="ChooseDialog_EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">numberSigned</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/foreground2</item>
     </style>
 
 </resources>

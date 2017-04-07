@@ -79,7 +79,8 @@ public class ViewBinderListManager {
         final int viewType = viewBinder.getItemViewType();
         if (existViewBinder(viewBinder)) {
             StringBuilder sb = new StringBuilder(1024);
-            sb.append(LOG_PREFIX + "ViewBinder is been registered in ViewBinderList already. type : " + viewType + '\n');
+            sb.append(
+                  LOG_PREFIX + "ViewBinder is been registered in ViewBinderList already. type : " + viewType + '\n');
             if (viewType == AbstractViewBinder.RECYCLER_HEADER_VIEW_TYPE) {
                 sb.append("Requested ViewType is HeaderView type. So, you have to use another type value.");
             } else if (viewType == AbstractViewBinder.RECYCLER_FOOTER_VIEW_TYPE) {
@@ -134,13 +135,13 @@ public class ViewBinderListManager {
     }
 
     public void onBindViewHolder(
-        RecyclerViewItem item,
-        RecyclerView.ViewHolder viewHolder) {
+          RecyclerViewItem item,
+          RecyclerView.ViewHolder viewHolder) {
 
         ViewBinder viewBinder = mViewBinderList.get(viewHolder.getItemViewType());
         if (viewBinder == null) {
             throw new NullPointerException(
-                "No ViewBinder added for ViewType " + viewHolder.getItemViewType());
+                  "No ViewBinder added for ViewType " + viewHolder.getItemViewType());
         }
         viewBinder.onBindViewHolder(item, viewHolder);
     }

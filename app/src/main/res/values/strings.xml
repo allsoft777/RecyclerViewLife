@@ -1,5 +1,33 @@
 <resources>
     <string name="app_name">RecyclerView-Library</string>
-    <string name="transaction_list">Transaction List</string>
+    <string name="demo_title">RecyclerView Library Demo</string>
     <string name="no_items">No items</string>
+
+    <string name="loading">Loading...</string>
+    <string name="no_previous_items">No previous items.</string>
+    <string name="no_next_items">No next items.</string>
+    <string name="touch_to_load_next_data">Touch here to load next data.</string>
+    <string name="touch_to_load_previous_data">Touch here to load previous data.</string>
+
+    <string name="msg_touch_one_more_to_finish">Touch again to exit it.</string>
+    <string name="menu_top_direction">Top direction</string>
+    <string name="menu_bottom_direction">Bottom direction</string>
+    <string name="menu_both_direction">Both direction</string>
+    <string name="menu_infinite_loading">Infinite loading</string>
+    <string name="menu_touch_loading">Touch loading</string>
+
+    <string name="option">Option</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="loading_direction">Loading direction</string>
+    <string name="loading_mode">Loading mode</string>
+    <string name="after_loading_whole_items">After loading whole items</string>
+    <string name="hide_header_footer_item">Hide header and footer</string>
+    <string name="show_touch_label">Show touch label</string>
+
+    <string name="guide_enter_total_number">Enter the total number of items to load.</string>
+    <string name="hint_enter_total_number">Input a count loaded items. (50 ~</string>
+    <string name="guide_enter_cycle_number">Enter the cycle number of items to load.</string>
+    <string name="hint_enter_cycle_number">Input a item count per cycle. (5 ~ 20)</string>
+
 </resources>

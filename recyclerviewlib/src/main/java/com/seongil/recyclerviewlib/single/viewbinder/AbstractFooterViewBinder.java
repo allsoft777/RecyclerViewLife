@@ -38,8 +38,8 @@ public abstract class AbstractFooterViewBinder extends AbstractViewBinder {
     // Constructors
     // ========================================================================
     public AbstractFooterViewBinder(
-        @NonNull LayoutInflater inflater,
-        @Nullable RecyclerViewItemClickListener viewItemClickListener) {
+          @NonNull LayoutInflater inflater,
+          @Nullable RecyclerViewItemClickListener viewItemClickListener) {
         super(RECYCLER_FOOTER_VIEW_TYPE, inflater, viewItemClickListener);
     }
 

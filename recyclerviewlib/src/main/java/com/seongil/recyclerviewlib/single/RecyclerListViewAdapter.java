@@ -20,10 +20,10 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 
 import com.seongil.recyclerviewlib.LibUtils;
-import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
-import com.seongil.recyclerviewlib.model.common.ViewStatus;
 import com.seongil.recyclerviewlib.model.RecyclerViewFooterItem;
 import com.seongil.recyclerviewlib.model.RecyclerViewHeaderItem;
+import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
+import com.seongil.recyclerviewlib.model.common.ViewStatus;
 import com.seongil.recyclerviewlib.single.viewbinder.AbstractFooterViewBinder;
 import com.seongil.recyclerviewlib.single.viewbinder.AbstractHeaderViewBinder;
 import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
@@ -33,7 +33,7 @@ import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
  * @since 17. 3. 21
  */
 public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
-    extends AbstractRecyclerViewAdapter<T> {
+      extends AbstractRecyclerViewAdapter<T> {
 
     // ========================================================================
     // Constants
@@ -57,7 +57,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
     // Constructors
     // ========================================================================
     public RecyclerListViewAdapter(
-        @NonNull LayoutInflater layoutInflater) {
+          @NonNull LayoutInflater layoutInflater) {
         super(layoutInflater);
     }
 
@@ -99,6 +99,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
     // ========================================================================
     // Methods
     // ========================================================================
+
     /**
      * If you want to use FooterItem on {@link RecyclerView}, you have to override this method.
      *
@@ -223,14 +224,16 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
 
     protected RecyclerViewHeaderItem getRecyclerHeaderViewItemFromDataSet() {
         if (!mUseHeaderView) {
-            throw new RuntimeException("You are not using the header view. You can't update the code of the header view.");
+            throw new RuntimeException(
+                  "You are not using the header view. You can't update the code of the header view.");
         }
         return (RecyclerViewHeaderItem) getItem(0);
     }
 
     protected RecyclerViewFooterItem getRecyclerFooterViewItemFromDataSet() {
         if (!mUseFooterView) {
-            throw new RuntimeException("You are not using the footer view. You can't update the code of the footer view.");
+            throw new RuntimeException(
+                  "You are not using the footer view. You can't update the code of the footer view.");
         }
         return (RecyclerViewFooterItem) getItem(getItemCount() - 1);
     }

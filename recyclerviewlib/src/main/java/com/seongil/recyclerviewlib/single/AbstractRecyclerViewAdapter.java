@@ -23,9 +23,9 @@ import android.view.ViewGroup;
 
 import com.seongil.recyclerviewlib.LibUtils;
 import com.seongil.recyclerviewlib.RecyclerListViewListener;
-import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
 import com.seongil.recyclerviewlib.model.RecyclerViewFooterItem;
 import com.seongil.recyclerviewlib.model.RecyclerViewHeaderItem;
+import com.seongil.recyclerviewlib.model.common.RecyclerViewItem;
 import com.seongil.recyclerviewlib.single.viewbinder.AbstractViewBinder;
 import com.seongil.recyclerviewlib.single.viewbinder.ViewBinder;
 import com.seongil.recyclerviewlib.single.viewbinder.ViewBinderListManager;
@@ -38,8 +38,8 @@ import java.util.List;
  * @since 17. 3. 21
  */
 public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
-    extends RecyclerView.Adapter
-    implements RecyclerListViewListener {
+      extends RecyclerView.Adapter
+      implements RecyclerListViewListener {
 
     // ========================================================================
     // Constants

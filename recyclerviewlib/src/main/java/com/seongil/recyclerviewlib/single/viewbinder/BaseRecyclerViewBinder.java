@@ -30,6 +30,7 @@ public interface BaseRecyclerViewBinder {
     // ========================================================================
     // Methods
     // ========================================================================
+
     /**
      * Returns the view type
      *
@@ -57,8 +58,8 @@ public interface BaseRecyclerViewBinder {
      * Called to bind the {@link RecyclerView.ViewHolder} to the item of DataSet
      *
      * @param recyclerViewItem Target recyclerview item.
-     * @param position         The position in DataSet
-     * @param holder           The {@link RecyclerView.ViewHolder} to bind
+     * @param position The position in DataSet
+     * @param holder The {@link RecyclerView.ViewHolder} to bind
      */
     void onBindViewHolder(RecyclerViewItem recyclerViewItem, int position, RecyclerView.ViewHolder holder);
 }

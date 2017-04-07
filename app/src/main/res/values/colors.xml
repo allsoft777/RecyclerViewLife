@@ -3,4 +3,25 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="foreground1">#FFFFFFFF</color>
+    <color name="background2">#FFf7f7f7</color>
+    <color name="foreground2">#CC030303</color>
+
+    <!-- pastel -->
+    <color name="pastel_light_grey_low">#C5C5C5</color>
+    <color name="pastel_black_low">#4B4B4B</color>
+    <color name="pastel_black_medium">#262626</color>
+    <color name="pastel_black_high">#000000</color>
+    <color name="pastel_red_light_low">#FF9999</color>
+    <color name="pastel_red_light_medium">#FF6666</color>
+    <color name="pastel_red_light_high">#E54C4C</color>
+    <color name="pastel_red_medium_low">#FF0000</color>
+    <color name="pastel_red_medium_medium">#E62117</color>
+    <color name="pastel_red_medium_high">#CC0000</color>
+    <color name="pastel_yellow_medium">#FFB900</color>
+
+    <!-- list item -->
+    <color name="listitem_primary_text_color">@@color/pastel_black_high</color>
+    <color name="listitem_secondary_text_color">@@color/pastel_black_low</color>
 </resources>

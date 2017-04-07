@@ -1,0 +1,126 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/dialog_min_width"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/loading_direction"
+            style="@style/ChooseDialog_Subject_TextStyle"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_loading_direction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_dir_header_view"
+                android:text="@string/menu_top_direction"
+                style="@style/RadioButton_Common"/>
+
+            <RadioButton
+                android:id="@+id/rb_dir_footer_view"
+                android:text="@string/menu_bottom_direction"
+                style="@style/RadioButton_Common"/>
+
+            <RadioButton
+                android:id="@+id/rb_dir_both"
+                android:text="@string/menu_both_direction"
+                style="@style/RadioButton_Common"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:text="@string/loading_mode"
+            style="@style/ChooseDialog_Subject_TextStyle"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_loading_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_infinite_loading"
+                android:text="@string/menu_infinite_loading"
+                style="@style/RadioButton_Common"/>
+
+            <RadioButton
+                android:id="@+id/rb_touch_loading"
+                android:text="@string/menu_touch_loading"
+                style="@style/RadioButton_Common"/>
+        </RadioGroup>
+
+        <TextView
+            android:text="@string/after_loading_whole_items"
+            style="@style/ChooseDialog_Subject_TextStyle"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_after_loading_whole_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_hide_header_footer_item"
+                android:text="@string/hide_header_footer_item"
+                style="@style/RadioButton_Common"/>
+
+            <RadioButton
+                android:id="@+id/rb_show_touch_label"
+                android:text="@string/show_touch_label"
+                style="@style/RadioButton_Common"/>
+        </RadioGroup>
+
+        <TextView
+            android:text="@string/guide_enter_total_number"
+            style="@style/ChooseDialog_Subject_TextStyle"/>
+
+        <EditText
+            android:id="@+id/input_item_count"
+            android:hint="@string/hint_enter_total_number"
+            style="@style/ChooseDialog_EditText"/>
+
+        <TextView
+            android:text="@string/guide_enter_cycle_number"
+            style="@style/ChooseDialog_Subject_TextStyle"/>
+
+        <EditText
+            android:id="@+id/input_loading_item_count"
+            android:hint="@string/hint_enter_cycle_number"
+            style="@style/ChooseDialog_EditText"/>
+
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:textSize="13dp"/>
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/confirm"
+                android:textSize="13dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

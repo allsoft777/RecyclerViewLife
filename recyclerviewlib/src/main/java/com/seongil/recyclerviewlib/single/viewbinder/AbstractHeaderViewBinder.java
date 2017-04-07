@@ -38,8 +38,8 @@ public abstract class AbstractHeaderViewBinder extends AbstractViewBinder {
     // Constructors
     // ========================================================================
     public AbstractHeaderViewBinder(
-        @NonNull LayoutInflater inflater,
-        @Nullable RecyclerViewItemClickListener viewItemClickListener) {
+          @NonNull LayoutInflater inflater,
+          @Nullable RecyclerViewItemClickListener viewItemClickListener) {
         super(RECYCLER_HEADER_VIEW_TYPE, inflater, viewItemClickListener);
     }
 

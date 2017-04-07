@@ -29,6 +29,7 @@ public interface RecyclerListViewListener {
     // ========================================================================
     // methods
     // ========================================================================
+
     /**
      * If you called {@link RecyclerListViewAdapter#registerFooterView()} from the concrete view, it will return "true"
      *

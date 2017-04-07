@@ -48,11 +48,11 @@ public class RecyclerViewDividerItemDecor extends RecyclerView.ItemDecoration {
     // Constructors
     // ========================================================================
     public RecyclerViewDividerItemDecor(
-        Context context, int orientation, @DrawableRes int resId) {
+          Context context, int orientation, @DrawableRes int resId) {
         mDividerDrawable = ContextCompat.getDrawable(context, resId);
         if (orientation != RecyclerView.VERTICAL && orientation != RecyclerView.HORIZONTAL) {
             throw new IllegalArgumentException("You have to pass a valid orientation " +
-                "using in RecyclerView. You passed a value of " + orientation);
+                  "using in RecyclerView. You passed a value of " + orientation);
         }
         mOrientation = orientation;
     }

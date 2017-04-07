@@ -72,9 +72,8 @@ android {
     buildTypes {
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
-                output.outputFile = new File(
-                        output.outputFile.parent,
-                        output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+                output.outputFile = new File(output.outputFile.parent,
+                      output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
             }
         }
 
@@ -106,8 +105,7 @@ dependencies {
     compile(project(':recyclerviewlib'))
 
     /**
-     * Google Library
-     */
+     * Google Library*/
     def googleDependencies = rootProject.ext.googleDependencies
     compile googleDependencies.supportV4
     compile googleDependencies.recyclerview
@@ -115,8 +113,7 @@ dependencies {
     compile googleDependencies.annotation
 
     /**
-     * Library
-     */
+     * Library*/
     def libraryDependencies = rootProject.ext.libraryDependencies
     compile libraryDependencies.picasso
     retrolambdaConfig libraryDependencies.retroLambda
@@ -128,10 +125,14 @@ dependencies {
     compile libraryDependencies.guava
     compile libraryDependencies.glide
     compile libraryDependencies.glideTransformations
+    compile libraryDependencies.butterknife
+    annotationProcessor libraryDependencies.butterknifeProcessor
+
+    debugCompile libraryDependencies.leakCanaryDebug
+    releaseCompile libraryDependencies.leakCanaryRelease
 
     /**
-     * Test Dependency
-     */
+     * Test Dependency*/
     def testDependencies = rootProject.ext.testDependencies
     testCompile(testDependencies.junit) {
         exclude group: 'org.hamcrest', module: 'hamcrest-core'
@@ -151,5 +152,4 @@ dependencies {
     testCompile(testDependencies.robolectricShadowsHttpClient) {
         exclude group: 'org.robolectric', module: 'robolectric'
     }
-
 }

@@ -83,24 +83,24 @@ public abstract class AbstractViewBinder implements ViewBinder {
     }
 
     public AbstractViewBinder(
-        final int viewType,
-        @NonNull LayoutInflater inflater,
-        @Nullable RecyclerViewItemClickListener itemClickListener) {
+          final int viewType,
+          @NonNull LayoutInflater inflater,
+          @Nullable RecyclerViewItemClickListener itemClickListener) {
         this(viewType, inflater, itemClickListener, null);
     }
 
     public AbstractViewBinder(
-        final int viewType,
-        @NonNull LayoutInflater inflater,
-        @Nullable RecyclerViewItemLongClickListener itemLongClickListener) {
+          final int viewType,
+          @NonNull LayoutInflater inflater,
+          @Nullable RecyclerViewItemLongClickListener itemLongClickListener) {
         this(viewType, inflater, null, itemLongClickListener);
     }
 
     public AbstractViewBinder(
-        final int viewType,
-        @NonNull LayoutInflater inflater,
-        @Nullable RecyclerViewItemClickListener itemClickListener,
-        @Nullable RecyclerViewItemLongClickListener itemLongClickListener) {
+          final int viewType,
+          @NonNull LayoutInflater inflater,
+          @Nullable RecyclerViewItemClickListener itemClickListener,
+          @Nullable RecyclerViewItemLongClickListener itemLongClickListener) {
 
         mViewType = viewType;
         mLayoutInflater = inflater;
@@ -145,9 +145,9 @@ public abstract class AbstractViewBinder implements ViewBinder {
         // Methods
         // ========================================================================
         void onClickedRecyclerViewItem(
-            @NonNull RecyclerView.ViewHolder vh,
-            @NonNull RecyclerViewItem info,
-            final int position);
+              @NonNull RecyclerView.ViewHolder vh,
+              @NonNull RecyclerViewItem info,
+              final int position);
     }
 
     /**
@@ -163,8 +163,8 @@ public abstract class AbstractViewBinder implements ViewBinder {
         // Methods
         // ========================================================================
         void onLongClickedRecyclerViewItem(
-            @NonNull RecyclerView.ViewHolder vh,
-            @NonNull RecyclerViewItem info,
-            final int position);
+              @NonNull RecyclerView.ViewHolder vh,
+              @NonNull RecyclerViewItem info,
+              final int position);
     }
 }
