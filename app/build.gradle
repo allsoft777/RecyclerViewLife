@@ -73,7 +73,7 @@ android {
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
                 output.outputFile = new File(output.outputFile.parent,
-                      output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
             }
         }
 
@@ -102,10 +102,11 @@ android {
 }
 
 dependencies {
-    compile(project(':recyclerviewlib'))
+    compile(project(':recyclerviewlife'))
 
     /**
-     * Google Library*/
+     * Google Library
+     */
     def googleDependencies = rootProject.ext.googleDependencies
     compile googleDependencies.supportV4
     compile googleDependencies.recyclerview
@@ -113,7 +114,8 @@ dependencies {
     compile googleDependencies.annotation
 
     /**
-     * Library*/
+     * Library
+     */
     def libraryDependencies = rootProject.ext.libraryDependencies
     compile libraryDependencies.picasso
     retrolambdaConfig libraryDependencies.retroLambda
@@ -132,7 +134,8 @@ dependencies {
     releaseCompile libraryDependencies.leakCanaryRelease
 
     /**
-     * Test Dependency*/
+     * Test Dependency
+     */
     def testDependencies = rootProject.ext.testDependencies
     testCompile(testDependencies.junit) {
         exclude group: 'org.hamcrest', module: 'hamcrest-core'
