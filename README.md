@@ -44,9 +44,9 @@ dependencies {
     <type>pom</type>
 </dependency>
 ```
-
 <br>
 <a id="simple_listview"></a>
+
 ### 2. Simple ListView 구현
 
 <a id="simple_listview_model"></a>
@@ -153,6 +153,7 @@ Caller(Activity, Fragment, etc...)에서 사용할 때에는 기존에 사용하
 ```
 <br>
 <a id="scrolling"></a>
+
 ### 3. 스크롤시 데이터 자동 로드 및 FH(FooterView, HeaderView) 구현
 
 스크롤을 했을때 데이터를 자동으로 로드 하는 기능 및 사용자가 FH를 터치 했을 때에만 로드 할 수 있는 기능을 지원한다. 앞으로 보여질 데이터가 몇개 미만으로 남았을때 자동으로 로드 할 수 있게끔 별도의 threshold값을 제공하고 개발자는 이를 설정 할 수도 있다. FH에서는 기본적으로 현재의 로드 상황을 보여주는 기능을 하지만 얼마든지 커스텀한 뷰로 확장 할 수 있다.
