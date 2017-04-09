@@ -38,8 +38,7 @@ import java.util.List;
  * @since 17. 3. 21
  */
 public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
-      extends RecyclerView.Adapter
-      implements RecyclerListViewListener {
+      extends RecyclerView.Adapter implements RecyclerListViewListener {
 
     // ========================================================================
     // Constants
@@ -189,7 +188,7 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
 
     public void addPosition(T element, int position) {
         if (position < 0 || position > getItemCount()) {
-            throw new IndexOutOfBoundsException("position is invalid. : " + position);
+            throw new IndexOutOfBoundsException("Position is invalid. : " + position);
         }
         mDataSet.add(position, element);
 
@@ -224,12 +223,8 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
     }
 
     public void updatePositionWithNotify(T element, int position) {
-        replaceElement(element, position);
+        mDataSet.set(position, element);
         notifyItemChanged(position);
-    }
-
-    public void replaceElement(T object, int position) {
-        mDataSet.set(position, object);
     }
 
     public void clearDataSet() {
@@ -269,9 +264,9 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         removeFirstItem();
     }
 
-    public void replaceElement(int position, T element) {
-        if (getItemCount() <= position) {
-            throw new IllegalArgumentException("Position is invalid");
+    public void replaceElement(T element, int position) {
+        if (getItemCount() <= position || position < 0) {
+            throw new IndexOutOfBoundsException("Position is invalid : " + position);
         }
         mDataSet.set(position, element);
 
@@ -280,7 +275,7 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         }
     }
 
-    protected T getItem(int position) {
+    public T getItem(int position) {
         return mDataSet.get(position);
     }
 

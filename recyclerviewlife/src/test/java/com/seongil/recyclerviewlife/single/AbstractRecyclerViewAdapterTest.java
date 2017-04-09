@@ -140,10 +140,10 @@ public class AbstractRecyclerViewAdapterTest {
         adapter.addFirst(item1);
         assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
 
-        adapter.replaceElement(0, item2);
+        adapter.replaceElement(item2, 0);
         assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem2.class));
 
-        adapter.replaceElement(0, item1);
+        adapter.replaceElement(item1, 0);
         assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
     }
 
@@ -152,7 +152,7 @@ public class AbstractRecyclerViewAdapterTest {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
 
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
-        adapter.replaceElement(1, item1);
+        adapter.replaceElement(item1, 1);
     }
 
     @Test

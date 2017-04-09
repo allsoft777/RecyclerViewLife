@@ -71,7 +71,6 @@ public class LinearListViewFragment extends Fragment
     private boolean mExistNextItems = true;
     private boolean mInLoadingNextItems = false;
 
-    private LinearRecyclerViewScrollListener mScrollListener;
     private Disposable mLoaderTopDirection;
     private Disposable mLoaderBottomDirection;
 
@@ -131,7 +130,6 @@ public class LinearListViewFragment extends Fragment
         if (mCurShowingDialog != null) {
             mCurShowingDialog.dismiss();
         }
-        stopLoading();
         super.onPause();
     }
 
@@ -196,13 +194,13 @@ public class LinearListViewFragment extends Fragment
             mAdapter.registerFooterView();
         }
 
-        LinearLayoutManager llm = new LinearLayoutManager(MainApplication.getAppContext());
+        final LinearLayoutManager llm = new LinearLayoutManager(MainApplication.getAppContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mListView.setLayoutManager(llm);
         mListView.setAdapter(mAdapter);
         mListView.setHasFixedSize(true);
         mListView.setFocusable(false);
-        mScrollListener = new LinearRecyclerViewScrollListener(llm, mAdapter) {
+        final LinearRecyclerViewScrollListener scrollListener = new LinearRecyclerViewScrollListener(llm, mAdapter) {
 
             @Override
             protected boolean isLoadingNextItems() {
@@ -215,7 +213,7 @@ public class LinearListViewFragment extends Fragment
             }
 
             @Override
-            public void onLoadNextData() {
+            protected void onLoadNextData() {
                 super.onLoadNextData();
                 if (mExistNextItems && !mInLoadingNextItems) {
                     fetchBottomDirectionDataSet(mItemCountPerCycle, false);
@@ -223,7 +221,7 @@ public class LinearListViewFragment extends Fragment
             }
 
             @Override
-            public void onLoadPrevData() {
+            protected void onLoadPrevData() {
                 super.onLoadPrevData();
                 if (mExistPrevItems && !mInLoadingPrevItems) {
                     fetchTopDirectionDataSet(mItemCountPerCycle, false);
@@ -231,7 +229,7 @@ public class LinearListViewFragment extends Fragment
             }
         };
         mListView.clearOnScrollListeners();
-        mListView.addOnScrollListener(mScrollListener);
+        mListView.addOnScrollListener(scrollListener);
 
         // Start loading data as per the options user selected.
         if (mLoadingDirection == OptionDialogFragment.LOADING_FOOTER) {

@@ -36,13 +36,14 @@ public class LinearListViewAdapter extends RecyclerListViewAdapter {
     // ========================================================================
     // fields
     // ========================================================================
-    private final int mLoadingMode; // For testing..
+    private final int mLoadingMode;
     @Nullable
     private RecyclerViewItemClickListener mViewItemClickListener;
 
     // ========================================================================
     // constructors
     // ========================================================================
+    @SuppressWarnings("unchecked")
     public LinearListViewAdapter(int loadingMode, // For testing
           @NonNull LayoutInflater layoutInflater,
           @Nullable RecyclerViewItemClickListener viewItemClickListener) {
@@ -52,11 +53,15 @@ public class LinearListViewAdapter extends RecyclerListViewAdapter {
         mLoadingMode = loadingMode;
         mViewItemClickListener = viewItemClickListener;
 
-        addViewBinder(new LinearListTwoTextViewBinder(VIEW_TYPE_TITLE_DATE, layoutInflater, viewItemClickListener));
         addViewBinder(
-              new LinearListThumbnailTextViewBinder(VIEW_TYPE_THUMBNAIL_TITLE, layoutInflater, viewItemClickListener));
+              new LinearListTwoTextViewBinder(
+                    VIEW_TYPE_TITLE_DATE, layoutInflater, viewItemClickListener));
         addViewBinder(
-              new LinearListAdvertisementViewBinder(VIEW_TYPE_ADVERTISEMENT, layoutInflater, viewItemClickListener));
+              new LinearListThumbnailTextViewBinder(
+                    VIEW_TYPE_THUMBNAIL_TITLE, layoutInflater, viewItemClickListener));
+        addViewBinder(
+              new LinearListAdvertisementViewBinder(
+                    VIEW_TYPE_ADVERTISEMENT, layoutInflater, viewItemClickListener));
     }
 
     // ========================================================================

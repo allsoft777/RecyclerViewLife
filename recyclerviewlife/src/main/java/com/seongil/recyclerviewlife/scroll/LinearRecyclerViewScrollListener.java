@@ -79,7 +79,7 @@ public class LinearRecyclerViewScrollListener extends RecyclerView.OnScrollListe
     // ========================================================================
     // methods
     // ========================================================================
-    public void initScrollListener() {
+    private void initScrollListener() {
         mCntOfPrevTotalItem = 0;
         mPosOfFirstVisibleItem = 0;
         mCntOfVisibleItem = 0;
@@ -123,14 +123,14 @@ public class LinearRecyclerViewScrollListener extends RecyclerView.OnScrollListe
     /**
      * If you want to load the next data more, override this method.
      */
-    public void onLoadNextData() {
+    protected void onLoadNextData() {
         // Do nothing
     }
 
     /**
      * If you want to load previous data more, override this method.
      */
-    public void onLoadPrevData() {
+    protected void onLoadPrevData() {
         // Do nothing
     }
 
