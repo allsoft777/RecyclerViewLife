@@ -44,6 +44,7 @@ dependencies {
     <type>pom</type>
 </dependency>
 ```
+
 <br>
 <a id="simple_listview"></a>
 ### 2. Simple ListView 구현
