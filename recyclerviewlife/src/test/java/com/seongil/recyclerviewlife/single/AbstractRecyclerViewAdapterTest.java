@@ -147,7 +147,7 @@ public class AbstractRecyclerViewAdapterTest {
         assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testReplaceElementException() {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
 
