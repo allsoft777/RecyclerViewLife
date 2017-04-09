@@ -16,20 +16,15 @@ public class LinearRecyclerViewScrollListener extends RecyclerView.OnScrollListe
     // ========================================================================
     // constants
     // ========================================================================
+    // Represents the count of the minimum loaded items in the {@link RecyclerView}
+    private static final int CNT_OF_MINIMUM_LOADED_ITEMS = 20;
 
     // ========================================================================
     // fields
     // ========================================================================
-    private int AUTO_LOADING_THRESHOLD = 5;
-
-    // Represents the count of loaded items in the {@@link RecyclerView}
-    private static final int CNT_OF_MINIMUM_LOADED_ITEMS = 20;
-
+    private int mAutoLoadingThreshold = 5;
     private LinearLayoutManager mLinearLayoutManager;
     private RecyclerListViewListener mRecyclerListViewListener;
-
-    @ScrollDirection.ScrollDir
-    private int mScrollDirection = ScrollDirection.STOP;
 
     private int mCntOfPrevTotalItem;
     private int mPosOfFirstVisibleItem, mCntOfVisibleItem, mCntOfTotalItem;
@@ -52,6 +47,9 @@ public class LinearRecyclerViewScrollListener extends RecyclerView.OnScrollListe
     // ========================================================================
     // getter & setter
     // ========================================================================
+    public void setAutoLoadingThreshold(int threshold) {
+        mAutoLoadingThreshold = threshold;
+    }
 
     // ========================================================================
     // methods for/from superclass/interfaces
@@ -59,17 +57,19 @@ public class LinearRecyclerViewScrollListener extends RecyclerView.OnScrollListe
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        mScrollDirection = decideScrollDirection(dx, dy);
+
+        @ScrollDirection.ScrollDir
+        final int scrollDirection = decideScrollDirection(dx, dy);
 
         mCntOfVisibleItem = recyclerView.getChildCount();
         mCntOfTotalItem = mLinearLayoutManager.getItemCount();
         mPosOfFirstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
 
-        if (mScrollDirection == ScrollDirection.UP || mScrollDirection == ScrollDirection.LEFT) {
-            handleScrollUp(recyclerView);
-        } else if (mScrollDirection == ScrollDirection.DOWN || mScrollDirection == ScrollDirection.RIGHT) {
-            handleScrollDown(recyclerView);
-        } else if (mScrollDirection == ScrollDirection.STOP) {
+        if (scrollDirection == ScrollDirection.UP || scrollDirection == ScrollDirection.LEFT) {
+            handleScrollUp();
+        } else if (scrollDirection == ScrollDirection.DOWN || scrollDirection == ScrollDirection.RIGHT) {
+            handleScrollDown();
+        } else if (scrollDirection == ScrollDirection.STOP) {
             loadItemsMoreForcibly();
         } else {
             throw new AssertionError("Undefined scrolling direction.");
@@ -137,10 +137,10 @@ public class LinearRecyclerViewScrollListener extends RecyclerView.OnScrollListe
     /**
      * This method is triggered when the {link RecyclerView} is scrolling to the top position.
      */
-    private void handleScrollDown(final RecyclerView recyclerView) {
+    private void handleScrollDown() {
         if (!isLoadingPrevItems()
               && mRecyclerListViewListener.loadHeaderItemsMore()
-              && (mPosOfFirstVisibleItem <= AUTO_LOADING_THRESHOLD)) {
+              && (mPosOfFirstVisibleItem <= mAutoLoadingThreshold)) {
             onLoadPrevData();
         }
     }
@@ -148,13 +148,13 @@ public class LinearRecyclerViewScrollListener extends RecyclerView.OnScrollListe
     /**
      * This method is triggered when the {@link RecyclerView} is scrolling to the bottom position.
      */
-    private void handleScrollUp(final RecyclerView recyclerView) {
+    private void handleScrollUp() {
         if (isLoadingNextItems() && mCntOfTotalItem > mCntOfPrevTotalItem) {
             mCntOfPrevTotalItem = mCntOfTotalItem;
         }
 
         if (!isLoadingNextItems() && mRecyclerListViewListener.loadFooterItemsMore()
-              && (mCntOfTotalItem - mCntOfVisibleItem) <= (mPosOfFirstVisibleItem + AUTO_LOADING_THRESHOLD)) {
+              && (mCntOfTotalItem - mCntOfVisibleItem) <= (mPosOfFirstVisibleItem + mAutoLoadingThreshold)) {
             onLoadNextData();
         }
     }
