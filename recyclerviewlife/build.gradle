@@ -11,10 +11,6 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: "com.jfrog.artifactory"
 
-boolean isReleaseBuild = gradle.startParameter.taskNames.contains('bintrayUpload')
-version = isReleaseBuild ? VERSION_NAME : "$VERSION_NAME-SNAPSHOT"
-logger.info("RecyclerViewLife Library Version=$project.version")
-
 apply plugin: 'findbugs'
 task findbugs(type: FindBugs) {
     ignoreFailures = true
@@ -136,6 +132,13 @@ dependencies {
     }
 }
 
+String bintrayUser = System.getenv('BINTRAY_USER')
+String bintrayKey = System.getenv('BINTRAY_API_KEY')
+boolean isReleaseBuild = gradle.startParameter.taskNames.contains('bintrayUpload')
+
+version = isReleaseBuild ? VERSION_NAME : "$VERSION_NAME-SNAPSHOT"
+group = GROUP
+
 // Create source/javadoc artifacts for publishing
 apply from: "$rootDir/gradle/artifacts.gradle"
 
@@ -168,9 +171,6 @@ install {
         }
     }
 }
-
-String bintrayUser = System.getenv('BINTRAY_USER')
-String bintrayKey = System.getenv('BINTRAY_API_KEY')
 
 artifactory {
     contextUrl = 'https://oss.jfrog.org'
