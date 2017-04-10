@@ -116,7 +116,7 @@ public class LinearListTwoTextViewBinder extends AbstractViewBinder {
 <a id="simple_listview_adapter"></a>
 #### 2.3 RecyclerListViewAdapter 구현
 
-ViewBinder를 관리하고 data set을 관리하는 Adapter구현하자. RecyclerListViewAdapter를 상속 받아서 구현체를 만들고, FH가 필요 하면 필요한 각 메서드를 오버라이딩하면된다. 하기 샘플 코드는 일반적으로 사용되는 listview 에서 3가지의 타입을 지원하는 코드를 나타내고 FH의 구현에 대해서는 3번 section을 참고하자.
+ViewBinder를 관리하고 data set을 관리하는 Adapter를 구현하자. RecyclerListViewAdapter를 상속 받아서 구현체를 만들고, FH가 필요 하면 필요한 각 메서드를 오버라이딩하면된다. 하기 샘플 코드는 일반적으로 사용되는 listview 에서 3가지의 타입을 지원하는 코드를 나타내고 FH의 구현에 대해서는 3번 section을 참고하자.
 ```java
 public class LinearListViewAdapter extends RecyclerListViewAdapter {
 
@@ -128,8 +128,6 @@ public class LinearListViewAdapter extends RecyclerListViewAdapter {
           @NonNull LayoutInflater layoutInflater,
           @Nullable RecyclerViewItemClickListener viewItemClickListener) {
         super(layoutInflater);
-        setDataSet(new ArrayList());
-
         addViewBinder(
               new LinearListTwoTextViewBinder(
                     VIEW_TYPE_TITLE_DATE, layoutInflater, viewItemClickListener));
