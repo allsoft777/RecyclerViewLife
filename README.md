@@ -314,6 +314,7 @@ public class LinearListViewAdapter extends RecyclerListViewAdapter {
 
 ```
 <a id="fh_caller"></a>
+
 #### 3.4 Client Layer (caller 구현)
 
 RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 하기 코드를 살펴보자.
@@ -344,16 +345,18 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
     listview.setAdapter(adapter);
 ```
 <a id="fh_scroll_listener"></a>
+
 #### 3.5 LinearRecyclerViewScrollListener 구현
 "Auto Load More"를 지원하기 위하여 LinearRecyclerViewScrollListener 을 구현한다. 자세한 구현 샘플코드는 [LinearListViewFragment](https://github.com/allsoft777/RecyclerViewLife/blob/master/app/src/main/java/com/seongil/recyclerviewlife/sample/ui/linearlistview/LinearListViewFragment.java) 을 참고바란다.
 
 | api | 설명 |
 | :--- |:--- |
 |void setAutoLoadingThreshold(int threshold) | 몇개의 항목이 남았을때 데이터를 로드 할 것인지를 나타내는 값으로서 기본값은 5개이다. |
-|void loadItemsMoreForcibly()                       | 스크롤의 상태와는 관련없이 강제로 데이터를 로딩하는 기능을 한다. <br>보통 최초에 데이터를 로드하거나 SwipeRefreshLayout를 이용하여 리스트뷰를 refresh할때 사용된다. |
+|void loadItemsMoreForcibly()                | 스크롤의 상태와는 관련없이 강제로 데이터를 로딩하는 기능을 한다. <br>보통 최초에 데이터를 로드하거나 SwipeRefreshLayout를 이용하여 리스트뷰를 refresh할때 사용된다. |
 
 <br>
 <a id="fh_adapter_api"></a>
+
 ### 4. LinearListViewAdapter api
 
 | api | 설명 |
