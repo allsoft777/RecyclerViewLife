@@ -372,18 +372,19 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 | void replaceElement(int position, T element) | adapter가 가지고 있는 DataSet의 position에 있는 항목을 element로 교체한다.<br> 등록된 observer에 통지하지는 않는다. |
 
 
-## License
+License
+-------
 
-Copyright (C) 2017 Seongil Kim
+    Copyright (C) 2017 Seongil Kim
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+       http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
