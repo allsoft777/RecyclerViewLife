@@ -6,6 +6,8 @@
   <a href="https://github.com/allsoft777/RecyclerViewLife/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-APACHE-blue.svg?style=flat-square"></a>
 </p>
 
+RecyclerView를 활용하여 리스트뷰를 구현할때 사용되는 많은 Framework Api를 캡슐화 시키고 다양한 ViewBinder의 관리를 쉽게 할 수 있도록 편의 기능을 제공한다. 또한 Infinite Scrolling을 지원하는 별도의 Listener 구현체를 제공하고 HeaderView와 FooterView도 하나의 리스트 타입으로 제공해주고 있습니다. 해당 Listener를 통하여 자동으로 데이터를 로드할 수 있고 이를 HeaderView 또는 FooterView에(이하 HF) 진행 상황을 표시할 수 있으며 모두 커스텀하게 ViewBinder를 구현 할 수 있다.
+<br>
 
 * <a href="#build_setting">Build Settings</a>
 * <a href="#simple_listview">Simple ListView 구현</a>
@@ -20,8 +22,7 @@
 	* <a href="#fh_caller">Caller (client layer)</a>
 	* <a href="#fh_scroll_listener">Scroll Listener</a>
 * <a href="#fh_adapter_api">LinearListViewAdapter api</a>
-
-RecyclerView를 활용하여 리스트뷰를 구현할때 사용되는 많은 Framework Api를 캡슐화 시키고 다양한 ViewBinder의 관리를 쉽게 할 수 있도록 편의 기능을 제공한다. 또한 Infinite Scrolling을 지원하는 별도의 Listener 구현체를 제공하고 HeaderView와 FooterView도 하나의 리스트 타입으로 제공해주고 있습니다. 해당 Listener를 통하여 자동으로 데이터를 로드할 수 있고 이를 HeaderView 또는 FooterView에(이하 HF) 진행 상황을 표시할 수 있으며 모두 커스텀하게 ViewBinder를 구현 할 수 있다.
+<br>
 
 Usage
 -----
@@ -164,7 +165,7 @@ Caller(Activity, Fragment, etc...)에서 사용할 때에는 기존에 사용하
 ```java
 public class ClientFooterItem extends RecyclerViewFooterItem {
 
-	private int data1;
+    private int data1;
     private int data2;
 
 	public ClientFooterItem() {
@@ -180,7 +181,7 @@ public class ClientFooterItem extends RecyclerViewFooterItem {
 
 public class ClientHeaderItem extends RecyclerViewHeaderItem {
 
-	private int data1;
+    private int data1;
     private int data2;
 
 	public ClientHeaderItem() {
@@ -204,7 +205,7 @@ FooterViewBinder의 구현부를 살펴보자. 현재의 로드 상태에 따라
 ```java
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewItem item, @NonNull RecyclerView.ViewHolder holder) {
-        final RecyclerViewHeaderItem data = (RecyclerViewHeaderItem) item;
+        final ClientFooterItem data = (ClientFooterItem) item;
         final HeaderViewHolder viewHolder = (HeaderViewHolder) holder;
         final Resources res = holder.itemView.getResources();
         final ViewStatus code = data.getStatusCode();
@@ -357,9 +358,8 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 
 | api | 설명 |
 | :--- |:--- |
-| void setNotifyObservers(boolean notifyObservers)| Data가 변경되었을때 등록된 observer들에게 통지 할 것 인지를 설정하기 위한 api |
+| void setNotifyObservers(boolean mNotifyObservers)| Data가 변경되었을때 등록된 observer들에게 통지 할 것 인지를 설정하기 위한 api |
 | List<T> getDataSet() | adapter가 가지고 있는 DataSet을 반환한다. |
-| void setDataSet(List<T> dataSet) | adapter에 DataSet을 assign한다. |
 | public void clearDataSet() | adapter의 DataSet을 clear한다. |
 | void addFirstCollection(List<T> collection) | adapter가 가지고 있는 DataSet의 앞쪽에 list를 추가한다. |
 | public void addFirst(T element) | adapter가 가지고 있는 DataSet의 앞쪽에 element를 추가한다. |
@@ -370,6 +370,11 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 | void removeFirstItem() | adapter가 가지고 있는 DataSet의 첫번째 항목을 삭제한다. |
 | void updatePositionWithNotify(T element, int position) | setNotifyObservers를 통하여 notifyObservers가 false로 assign 되어 있더라도<br> 이 api를 통하여 특정 position의 element를 업데이트하고 등록된 observer에 통지한다. |
 | void replaceElement(int position, T element) | adapter가 가지고 있는 DataSet의 position에 있는 항목을 element로 교체한다.<br> 등록된 observer에 통지하지는 않는다. |
+| RecyclerViewHeaderItem getHeaderItem() | adapter가 가지고 있는 DataSet의 header item을 반환한다. |
+| RecyclerViewFooterItem getFooterItem() | adapter가 가지고 있는 DataSet의 footer item을 반환한다. |
+| void replaceHeaderItem(T element) | adapter가 가지고 있는 DataSet의 header item을 교체한다. |
+| void replaceFooterItem(T element) | adapter가 가지고 있는 DataSet의 footer item을 교체한다. |
+| T getItem(int position) | adapter가 가지고 있는 DataSet의 position 위치에 있는 항목을 반환한다. |
 
 
 License
