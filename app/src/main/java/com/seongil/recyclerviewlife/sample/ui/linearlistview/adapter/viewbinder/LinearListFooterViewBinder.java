@@ -25,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.seongil.recyclerviewlife.model.RecyclerViewFooterItem;
 import com.seongil.recyclerviewlife.model.common.RecyclerViewItem;
 import com.seongil.recyclerviewlife.model.common.ViewStatus;
 import com.seongil.recyclerviewlife.sample.R;
@@ -73,7 +72,7 @@ public class LinearListFooterViewBinder extends AbstractFooterViewBinder {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewItem item, @NonNull RecyclerView.ViewHolder holder) {
-        final RecyclerViewFooterItem data = (RecyclerViewFooterItem) item;
+        final ClientFooterItem data = (ClientFooterItem) item;
         final FooterViewHolder viewHolder = (FooterViewHolder) holder;
         final Resources res = holder.itemView.getResources();
         final ViewStatus code = data.getStatusCode();

@@ -115,10 +115,10 @@ public class LinearListViewFragment extends Fragment
 
     @Override
     public void onFinishedOptionSelection(
-          int loadingItemCnt, int loadingItemCntPerCycler, int loadingDirection,
+          int loadingItemCnt, int loadingItemCntPerCycle, int loadingDirection,
           int loadingMode, int actionAfterFinishedLoading) {
         mItemCount = loadingItemCnt;
-        mItemCountPerCycle = loadingItemCntPerCycler;
+        mItemCountPerCycle = loadingItemCntPerCycle;
         mLoadingDirection = loadingDirection;
         mLoadingMode = loadingMode;
         mLoadingFinishedAction = actionAfterFinishedLoading;

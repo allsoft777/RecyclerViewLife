@@ -43,10 +43,10 @@ public class MockRecyclerViewAdapterSimple extends AbstractRecyclerViewAdapter<R
     // ========================================================================
     public MockRecyclerViewAdapterSimple(LayoutInflater layoutInflater, TestViewBinder1 binder1) {
         super(layoutInflater);
-        List<RecyclerViewItem> items = new ArrayList<>();
-        setDataSet(items);
-
         setNotifyObservers(false);
+
+        List<RecyclerViewItem> items = new ArrayList<>();
+        addLastCollection(items);
         addViewBinder(binder1);
     }
 

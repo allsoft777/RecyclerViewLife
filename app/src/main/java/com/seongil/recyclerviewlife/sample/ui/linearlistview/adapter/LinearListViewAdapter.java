@@ -34,8 +34,6 @@ import com.seongil.recyclerviewlife.single.viewbinder.AbstractFooterViewBinder;
 import com.seongil.recyclerviewlife.single.viewbinder.AbstractHeaderViewBinder;
 import com.seongil.recyclerviewlife.single.viewbinder.AbstractViewBinder.RecyclerViewItemClickListener;
 
-import java.util.ArrayList;
-
 /**
  * @author seong-il, kim
  * @since 17. 4. 8
@@ -64,8 +62,6 @@ public class LinearListViewAdapter extends RecyclerListViewAdapter {
           @NonNull LayoutInflater layoutInflater,
           @Nullable RecyclerViewItemClickListener viewItemClickListener) {
         super(layoutInflater);
-        setDataSet(new ArrayList());
-
         mLoadingMode = loadingMode;
         mViewItemClickListener = viewItemClickListener;
 

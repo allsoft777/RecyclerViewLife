@@ -58,7 +58,6 @@ public class AbstractFooterViewBinderTest {
     // ========================================================================
     @Test
     public void testFooterViewBinder() {
-
         ViewBinderListManager mgr = new ViewBinderListManager();
         TestFooterViewBinder fvb = new TestFooterViewBinder(layoutInflater, null);
         mgr.addViewBinder(fvb);

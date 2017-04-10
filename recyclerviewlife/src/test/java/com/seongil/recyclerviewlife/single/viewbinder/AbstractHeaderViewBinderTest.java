@@ -56,8 +56,7 @@ public class AbstractHeaderViewBinderTest {
     // methods
     // ========================================================================
     @Test
-    public void testFooterViewBinder() {
-
+    public void testHeaderViewBinder() {
         ViewBinderListManager mgr = new ViewBinderListManager();
         TestHeaderViewBinder fvb = new TestHeaderViewBinder(layoutInflater, null);
         mgr.addViewBinder(fvb);

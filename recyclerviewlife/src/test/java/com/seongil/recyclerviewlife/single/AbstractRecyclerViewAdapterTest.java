@@ -38,6 +38,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -122,13 +123,13 @@ public class AbstractRecyclerViewAdapterTest {
 
         adapter.addLast(item2);
         Assert.assertEquals(adapter.getItemCount(), 2);
-        assertThat(adapter.getItem(1), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem2.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem2.class));
 
         adapter.addFirst(item3);
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem3.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem3.class));
 
         adapter.addPosition(item3, 1);
-        assertThat(adapter.getItem(1), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem3.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem3.class));
     }
 
     @Test
@@ -138,13 +139,13 @@ public class AbstractRecyclerViewAdapterTest {
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
         TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
         adapter.addFirst(item1);
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
 
         adapter.replaceElement(item2, 0);
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem2.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem2.class));
 
         adapter.replaceElement(item1, 0);
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -171,9 +172,9 @@ public class AbstractRecyclerViewAdapterTest {
         adapter.addFirstCollection(partialEmpty);
         Assert.assertEquals(partial.size(), adapter.getItemCount());
 
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
-        assertThat(adapter.getItem(1), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem2.class));
-        assertThat(adapter.getItem(2), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem3.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem2.class));
+        assertThat(adapter.getItem(2), instanceOf(TestRecyclerViewItem3.class));
     }
 
     @Test
@@ -192,9 +193,9 @@ public class AbstractRecyclerViewAdapterTest {
         adapter.addLastCollection(partialEmpty);
         Assert.assertEquals(partial.size(), adapter.getItemCount());
 
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
-        assertThat(adapter.getItem(1), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem2.class));
-        assertThat(adapter.getItem(2), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem3.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem2.class));
+        assertThat(adapter.getItem(2), instanceOf(TestRecyclerViewItem3.class));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -223,8 +224,8 @@ public class AbstractRecyclerViewAdapterTest {
         adapter.removeLastItem();
         Assert.assertEquals(adapter.getItemCount(), 2);
 
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem1.class));
-        assertThat(adapter.getItem(1), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem2.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem2.class));
 
         adapter.removeLastItem();
         adapter.removeLastItem();
@@ -246,8 +247,8 @@ public class AbstractRecyclerViewAdapterTest {
         adapter.removeFirstItem();
         Assert.assertEquals(adapter.getItemCount(), 2);
 
-        assertThat(adapter.getItem(0), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem2.class));
-        assertThat(adapter.getItem(1), org.hamcrest.CoreMatchers.instanceOf(TestRecyclerViewItem3.class));
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem2.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem3.class));
 
         adapter.removeFirstItem();
         adapter.removeFirstItem();
