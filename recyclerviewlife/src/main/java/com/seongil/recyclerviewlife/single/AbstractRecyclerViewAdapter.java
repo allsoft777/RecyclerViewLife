@@ -120,7 +120,22 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         return mViewBinderManager.size();
     }
 
-    public void addFirstCollection(List<T> collection) {
+    @SuppressWarnings("unchecked")
+    public void setData(@NonNull List<T> collection) {
+        if (registeredHeaderView()) {
+            collection.add(0, (T) getHeaderItem());
+        }
+        if (registeredFooterView()) {
+            collection.add(collection.size(), (T) getFooterItem());
+        }
+        mDataSet = collection;
+
+        if (mNotifyObservers) {
+            notifyItemRangeChanged(0, getItemCount());
+        }
+    }
+
+    public void addFirstCollection(@NonNull List<T> collection) {
         LibUtils.checkNotNull(collection, "Collection to add on the DataSet is null.");
 
         final int targetSize = collection.size();
@@ -132,7 +147,7 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         }
     }
 
-    public void addLastCollection(List<T> collection) {
+    public void addLastCollection(@NonNull List<T> collection) {
         LibUtils.checkNotNull(collection, "Collection to add on the DataSet is null.");
 
         final int targetSize = collection.size();

@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -70,9 +71,7 @@ public class LinearListViewFragment extends Fragment
     private boolean mInLoadingPrevItems = false;
     private boolean mExistNextItems = true;
     private boolean mInLoadingNextItems = false;
-
-    private Disposable mLoaderTopDirection;
-    private Disposable mLoaderBottomDirection;
+    private CompositeDisposable mCompositeDisposal;
 
     private int mItemCount = OptionDialogFragment.LOADING_ITEM_MIN_CNT;
     private int mItemCountPerCycle = OptionDialogFragment.LOADING_ITEM_MIN_CNT_PER_CYCLE;
@@ -110,6 +109,7 @@ public class LinearListViewFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mListView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mCompositeDisposal = new CompositeDisposable();
         initialize();
     }
 
@@ -243,12 +243,7 @@ public class LinearListViewFragment extends Fragment
     }
 
     private void stopLoading() {
-        if (mLoaderTopDirection != null) {
-            mLoaderTopDirection.dispose();
-        }
-        if (mLoaderBottomDirection != null) {
-            mLoaderBottomDirection.dispose();
-        }
+        mCompositeDisposal.clear();
     }
 
     @SuppressWarnings("unchecked")
@@ -284,12 +279,15 @@ public class LinearListViewFragment extends Fragment
         if (mAdapter.footerViewStatusCodeIsOneCycle()) {
             mAdapter.updateFooterViewStatusCodeForOneCycle(false);
         }
-        mAdapter.addLastCollection(result);
+
+        if (result != null) {
+            mAdapter.addLastCollection(result);
+        }
     }
 
     private void fetchTopDirectionDataSet(int count, boolean force) {
         mInLoadingPrevItems = true;
-        mLoaderTopDirection = DataProvider.getInstance().generateData(count, force)
+        Disposable disposable = DataProvider.getInstance().generateData(count, force)
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
               .delay(500, TimeUnit.MILLISECONDS)
@@ -297,11 +295,12 @@ public class LinearListViewFragment extends Fragment
                   fetchedPrevDataSet(recyclerViewItems);
                   mInLoadingPrevItems = false;
               }, t -> mInLoadingPrevItems = false);
+        mCompositeDisposal.add(disposable);
     }
 
     private void fetchBottomDirectionDataSet(int count, boolean force) {
         mInLoadingNextItems = true;
-        mLoaderBottomDirection = DataProvider.getInstance().generateData(count, force)
+        Disposable disposable = DataProvider.getInstance().generateData(count, force)
               .subscribeOn(Schedulers.io())
               .observeOn(AndroidSchedulers.mainThread())
               .delay(500, TimeUnit.MILLISECONDS)
@@ -309,6 +308,7 @@ public class LinearListViewFragment extends Fragment
                   fetchedNextDataSet(recyclerViewItems);
                   mInLoadingNextItems = false;
               }, t -> mInLoadingNextItems = false);
+        mCompositeDisposal.add(disposable);
     }
 
     private void launchOptionDialog() {

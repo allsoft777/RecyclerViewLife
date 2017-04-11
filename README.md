@@ -33,7 +33,7 @@ Usage
 ##### Gradle
 ```groovy
 dependencies {
-    compile 'com.seongil:recyclerviewlife:1.0.1'
+    compile 'com.seongil:recyclerviewlife:1.0.2'
 }
 ```
 ##### Maven
@@ -41,7 +41,7 @@ dependencies {
 <dependency>
     <groupId>com.seongil</groupId>
     <artifactId>recyclerviewlife</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <type>pom</type>
 </dependency>
 ```
@@ -361,6 +361,7 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 | :--- |:--- |
 | void setNotifyObservers(boolean mNotifyObservers)| Data가 변경되었을때 등록된 observer들에게 통지 할 것 인지를 설정하기 위한 api |
 | List<T> getDataSet() | adapter가 가지고 있는 DataSet을 반환한다. |
+| void setData(List<T> collection) | adapter의 DataSet을 인자와 교체한다. |
 | public void clearDataSet() | adapter의 DataSet을 clear한다. |
 | void addFirstCollection(List<T> collection) | adapter가 가지고 있는 DataSet의 앞쪽에 list를 추가한다. |
 | public void addFirst(T element) | adapter가 가지고 있는 DataSet의 앞쪽에 element를 추가한다. |

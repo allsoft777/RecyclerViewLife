@@ -59,7 +59,7 @@ public class AbstractRecyclerViewAdapterTest {
     // ========================================================================
     @Mock
     LayoutInflater layoutInflater;
-    TestViewBinder1 vb1;
+    private TestViewBinder1 vb1;
 
     // ========================================================================
     // constructors
@@ -133,7 +133,7 @@ public class AbstractRecyclerViewAdapterTest {
     }
 
     @Test
-    public void testReplaceElement() {
+    public void testReplaceElement() throws Exception {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
 
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
@@ -149,7 +149,7 @@ public class AbstractRecyclerViewAdapterTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testReplaceElementException() {
+    public void testReplaceElementException() throws Exception {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
 
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
@@ -157,7 +157,7 @@ public class AbstractRecyclerViewAdapterTest {
     }
 
     @Test
-    public void testAddFirstCollection() {
+    public void testAddFirstCollection() throws Exception {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
 
         List<RecyclerViewItem> partial = new ArrayList<>();
@@ -178,7 +178,7 @@ public class AbstractRecyclerViewAdapterTest {
     }
 
     @Test
-    public void testAddLastCollection() {
+    public void testAddLastCollection() throws Exception {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
 
         List<RecyclerViewItem> partial = new ArrayList<>();
@@ -199,7 +199,7 @@ public class AbstractRecyclerViewAdapterTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testAddPosition() {
+    public void testAddPosition() throws Exception {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
 
@@ -210,7 +210,7 @@ public class AbstractRecyclerViewAdapterTest {
     }
 
     @Test
-    public void testRemoveLastItem() {
+    public void testRemoveLastItem() throws Exception {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
         TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
@@ -233,7 +233,7 @@ public class AbstractRecyclerViewAdapterTest {
     }
 
     @Test
-    public void testRemoveFirstItem() {
+    public void testRemoveFirstItem() throws Exception {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
         TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();

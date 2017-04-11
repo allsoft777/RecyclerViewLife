@@ -77,6 +77,7 @@ public class MockRecyclerViewAdapterSimple extends AbstractRecyclerViewAdapter<R
         return false;
     }
 
+
     // ========================================================================
     // methods
     // ========================================================================
