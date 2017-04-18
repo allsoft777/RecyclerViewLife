@@ -9,6 +9,15 @@
 RecyclerView를 활용하여 리스트뷰를 구현할때 사용되는 많은 Framework Api를 캡슐화 시키고 다양한 ViewBinder의 관리를 쉽게 할 수 있도록 편의 기능을 제공한다. 또한 Infinite Scrolling을 지원하는 별도의 Listener 구현체를 제공하고 HeaderView와 FooterView도 하나의 리스트 타입으로 제공해주고 있습니다. 해당 Listener를 통하여 자동으로 데이터를 로드할 수 있고 이를 HeaderView 또는 FooterView에(이하 HF) 진행 상황을 표시할 수 있으며 모두 커스텀하게 ViewBinder를 구현 할 수 있다.
 <br>
 
+## Screenshot
+![](./gif/infinite_loading_bottom.gif)__
+![](./gif/infinite_loading_top.gif)
+![](./gif/infinite_loading_top_bottom.gif)__
+![](./gif/touch_loading_top_bottom.gif)
+![](./gif/infinite_loading_20ea_bottom.gif)
+
+<br>
+
 * <a href="#build_setting">Build Settings</a>
 * <a href="#simple_listview">Simple ListView 구현</a>
 	* <a href="#simple_listview_model">Model(entity class)</a>
