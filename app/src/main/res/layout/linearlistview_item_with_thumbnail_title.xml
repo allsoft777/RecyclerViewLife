@@ -35,7 +35,6 @@
         android:layout_width="@dimen/list_item_thumbnail_width"
         android:layout_height="@dimen/list_item_thumbnail_height"
         android:layout_gravity="center_vertical"
-        android:background="@android:color/darker_gray"
         android:scaleType="fitXY"/>
 
     <TextView

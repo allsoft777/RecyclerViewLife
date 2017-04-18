@@ -28,8 +28,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.seongil.recyclerviewlife.model.common.RecyclerViewItem;
 import com.seongil.recyclerviewlife.sample.R;
+import com.seongil.recyclerviewlife.sample.application.MainApplication;
 import com.seongil.recyclerviewlife.sample.model.ThumbnailTitleItem;
 import com.seongil.recyclerviewlife.single.viewbinder.AbstractViewBinder;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.CropSquareTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * @author seong-il, kim
@@ -87,6 +92,8 @@ public class LinearListThumbnailTextViewBinder extends AbstractViewBinder {
               .with(viewHolder.itemView.getContext())
               .fromResource()
               .load(data.getThumbnailResId())
+              .fitCenter()
+              .bitmapTransform(new RoundedCornersTransformation(MainApplication.getAppContext(), 40, 0))
               .into(viewHolder.image);
     }
 

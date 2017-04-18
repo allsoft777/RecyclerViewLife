@@ -20,14 +20,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -44,7 +42,7 @@
         <item name="android:textSize">15dp</item>
         <item name="android:maxLines">2</item>
         <item name="android:ellipsize">marquee</item>
-        <item name="android:textColor">@color/listitem_primary_text_color</item>
+        <item name="android:textColor">@color/list_item_primary_text_color</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -53,7 +51,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">12dp</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/listitem_secondary_text_color</item>
+        <item name="android:textColor">@color/list_item_secondary_text_color</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 

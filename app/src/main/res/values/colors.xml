@@ -38,6 +38,6 @@
     <color name="pastel_yellow_medium">#FFB900</color>
 
     <!-- list item -->
-    <color name="listitem_primary_text_color">@@color/pastel_black_high</color>
-    <color name="listitem_secondary_text_color">@@color/pastel_black_low</color>
+    <color name="list_item_primary_text_color">@color/pastel_black_high</color>
+    <color name="list_item_secondary_text_color">@color/pastel_black_low</color>
 </resources>
