@@ -12,8 +12,10 @@ RecyclerView를 활용하여 리스트뷰를 구현할때 사용되는 많은 Fr
 ## Screenshot
 ![](./gif/infinite_loading_bottom.gif)__
 ![](./gif/infinite_loading_top.gif)
+<br><br>
 ![](./gif/infinite_loading_top_bottom.gif)__
 ![](./gif/touch_loading_top_bottom.gif)
+<br><br>
 ![](./gif/infinite_loading_20ea_bottom.gif)
 
 <br>
