@@ -41,9 +41,9 @@
     <string name="hide_header_footer_item">Hide header and footer</string>
     <string name="show_touch_label">Show touch label</string>
 
-    <string name="guide_enter_total_number">Enter the total number of items to load.</string>
-    <string name="hint_enter_total_number">Input a count loaded items. (50 ~</string>
-    <string name="guide_enter_cycle_number">Enter the cycle number of items to load.</string>
-    <string name="hint_enter_cycle_number">Input a item count per cycle. (5 ~ 20)</string>
+    <string name="guide_enter_total_number">Enter the count to load</string>
+    <string name="hint_enter_total_number">50 ~</string>
+    <string name="guide_enter_cycle_number">Enter the count to load per cycle.</string>
+    <string name="hint_enter_cycle_number">5 ~ 20</string>
 
 </resources>
