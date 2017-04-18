@@ -331,7 +331,7 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 #### 3.4.1 HeaderView만 제공하는 경우
 ```java
     LinearListViewAdapter adapter = LinearListViewAdapter(getActivity().getLayoutInflater(), this);
-    mAdapter.registerHeaderView();
+    adapter.registerHeaderView();
     RecyclerView listview = // Assign a listview.
     listview.setAdapter(adapter);
 ```
@@ -340,7 +340,7 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 
 ```java
     LinearListViewAdapter adapter = LinearListViewAdapter(getActivity().getLayoutInflater(), this);
-    mAdapter.registerFooterView();
+    adapter.registerFooterView();
     RecyclerView listview = // Assign a listview.
     listview.setAdapter(adapter);
 ```
@@ -348,8 +348,8 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 #### 3.4.3 FH 둘다 제공하는 경우
 ```java
     LinearListViewAdapter adapter = LinearListViewAdapter(getActivity().getLayoutInflater(), this);
-    mAdapter.registerHeaderView();
-    mAdapter.registerFooterView();
+    adapter.registerHeaderView();
+    adapter.registerFooterView();
     RecyclerView listview = // Assign a listview.
     listview.setAdapter(adapter);
 ```
