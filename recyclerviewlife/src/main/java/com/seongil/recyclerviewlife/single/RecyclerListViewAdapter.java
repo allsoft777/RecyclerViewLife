@@ -88,14 +88,6 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
         return mUseHeaderView && getRecyclerHeaderViewItemFromDataSet().autoLoadData();
     }
 
-    @Override
-    public synchronized void clearDataSet() {
-        super.clearDataSet();
-        mUseHeaderView = false;
-        mUseFooterView = false;
-        clearViewBinders();
-    }
-
     // ========================================================================
     // Methods
     // ========================================================================
@@ -137,7 +129,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
     }
 
     @SuppressWarnings("unchecked")
-    public void registerFooterView() {
+    public void useFooterView() {
         if (mUseFooterView) {
             throw new IllegalArgumentException("Footer item is inserted already.");
         }
@@ -155,7 +147,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
     }
 
     @SuppressWarnings("unchecked")
-    public void registerHeaderView() {
+    public void useHeaderView() {
         if (mUseHeaderView) {
             throw new IllegalArgumentException("Header item is inserted already.");
         }

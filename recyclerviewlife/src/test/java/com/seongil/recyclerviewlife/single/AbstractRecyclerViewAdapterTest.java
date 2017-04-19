@@ -255,6 +255,25 @@ public class AbstractRecyclerViewAdapterTest {
         Assert.assertEquals(adapter.getItemCount(), 0);
     }
 
+    @Test
+    public void testRemoveItem() throws Exception {
+        MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
+        TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
+        TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
+        TestRecyclerViewItem3 item3 = new TestRecyclerViewItem3();
+
+        adapter.addLast(item1);
+        adapter.addLast(item2);
+        adapter.addLast(item3);
+
+        Assert.assertEquals(adapter.getItemCount(), 3);
+        adapter.removePosition(1, false);
+        Assert.assertEquals(adapter.getItemCount(), 2);
+
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem3.class));
+    }
+
     // ========================================================================
     // inner and anonymous classes
     // ========================================================================

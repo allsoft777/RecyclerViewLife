@@ -34,16 +34,16 @@ public interface RecyclerListViewListener {
     // ========================================================================
 
     /**
-     * If you called {@link RecyclerListViewAdapter#registerFooterView()} from the concrete view, it will return "true"
+     * If you called {@link RecyclerListViewAdapter#useFooterView()} from the concrete view, it will return "true"
      *
-     * @return true, User is called {@link RecyclerListViewAdapter#registerFooterView()} from the concrete view.
+     * @return true, User is called {@link RecyclerListViewAdapter#useFooterView()} from the concrete view.
      */
     boolean registeredFooterView();
 
     /**
-     * If you called {@link RecyclerListViewAdapter#registerHeaderView()} from the concrete view, it will return "true"
+     * If you called {@link RecyclerListViewAdapter#useHeaderView()} from the concrete view, it will return "true"
      *
-     * @return true, User is called {@link RecyclerListViewAdapter#registerHeaderView()} from the concrete view.
+     * @return true, User is called {@link RecyclerListViewAdapter#useHeaderView()} from the concrete view.
      */
     boolean registeredHeaderView();
 

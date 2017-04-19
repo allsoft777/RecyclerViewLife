@@ -67,7 +67,7 @@ public class RecyclerListViewAdapterTest {
     @SuppressWarnings("unchecked")
     public void testReplaceCollectionWithFooterView() throws Exception {
         MockRecyclerListViewAdapter adapter = new MockRecyclerListViewAdapter(mLayoutInflater);
-        adapter.registerFooterView();
+        adapter.useFooterView();
 
         List<RecyclerViewItem> list = new ArrayList<>();
         list.add(new TestRecyclerViewItem1());
@@ -88,7 +88,7 @@ public class RecyclerListViewAdapterTest {
     @SuppressWarnings("unchecked")
     public void testReplaceCollectionWithHeaderView() throws Exception {
         MockRecyclerListViewAdapter adapter = new MockRecyclerListViewAdapter(mLayoutInflater);
-        adapter.registerHeaderView();
+        adapter.useHeaderView();
 
         List<RecyclerViewItem> list = new ArrayList<>();
         list.add(new TestRecyclerViewItem1());
