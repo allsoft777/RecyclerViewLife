@@ -232,6 +232,25 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         }
     }
 
+    public void removePosition(int position) {
+        removePosition(position, mNotifyObservers);
+    }
+
+    public void removePosition(int position, boolean notifyToObservers) {
+        if (getItemCount() == 0) {
+            return;
+        }
+
+        if (position < 0 || position >= getItemCount()) {
+            throw new IndexOutOfBoundsException("Given position is invalid.");
+        }
+
+        mDataSet.remove(position);
+        if (notifyToObservers) {
+            notifyItemChanged(position);
+        }
+    }
+
     public void updatePositionWithNotify(T element, int position) {
         mDataSet.set(position, element);
         notifyItemChanged(position);
