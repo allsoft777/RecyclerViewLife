@@ -46,7 +46,7 @@ public class MockRecyclerViewAdapterSimple extends AbstractRecyclerViewAdapter<R
         setNotifyObservers(false);
 
         List<RecyclerViewItem> items = new ArrayList<>();
-        addLastCollection(items);
+        addCollectionToLastPosition(items);
         addViewBinder(binder1);
     }
 

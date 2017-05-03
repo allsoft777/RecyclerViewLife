@@ -67,12 +67,12 @@ public class RecyclerListViewAdapterTest {
     @SuppressWarnings("unchecked")
     public void testReplaceCollectionWithFooterView() throws Exception {
         MockRecyclerListViewAdapter adapter = new MockRecyclerListViewAdapter(mLayoutInflater);
-        adapter.registerFooterView();
+        adapter.useFooterView();
 
         List<RecyclerViewItem> list = new ArrayList<>();
         list.add(new TestRecyclerViewItem1());
         list.add(new TestRecyclerViewItem2());
-        adapter.addLastCollection(list);
+        adapter.addCollectionToLastPosition(list);
 
         Assert.assertEquals(adapter.getDataSet().size(), list.size() + 1);
         Assert.assertEquals(adapter.getFooterItem(), adapter.getDataSet().get(2));
@@ -88,12 +88,12 @@ public class RecyclerListViewAdapterTest {
     @SuppressWarnings("unchecked")
     public void testReplaceCollectionWithHeaderView() throws Exception {
         MockRecyclerListViewAdapter adapter = new MockRecyclerListViewAdapter(mLayoutInflater);
-        adapter.registerHeaderView();
+        adapter.useHeaderView();
 
         List<RecyclerViewItem> list = new ArrayList<>();
         list.add(new TestRecyclerViewItem1());
         list.add(new TestRecyclerViewItem2());
-        adapter.addLastCollection(list);
+        adapter.addCollectionToLastPosition(list);
 
         Assert.assertEquals(adapter.getDataSet().size(), list.size() + 1);
         Assert.assertEquals(adapter.getHeaderItem(), adapter.getDataSet().get(0));

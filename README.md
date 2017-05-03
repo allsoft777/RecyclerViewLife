@@ -44,7 +44,7 @@ Usage
 ##### Gradle
 ```groovy
 dependencies {
-    compile 'com.seongil:recyclerviewlife:1.0.2'
+    compile 'com.seongil:recyclerviewlife:1.0.3'
 }
 ```
 ##### Maven
@@ -52,7 +52,7 @@ dependencies {
 <dependency>
     <groupId>com.seongil</groupId>
     <artifactId>recyclerviewlife</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <type>pom</type>
 </dependency>
 ```
@@ -331,7 +331,7 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 #### 3.4.1 HeaderView만 제공하는 경우
 ```java
     LinearListViewAdapter adapter = LinearListViewAdapter(getActivity().getLayoutInflater(), this);
-    adapter.registerHeaderView();
+    adapter.useHeaderView();
     RecyclerView listview = // Assign a listview.
     listview.setAdapter(adapter);
 ```
@@ -340,7 +340,7 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 
 ```java
     LinearListViewAdapter adapter = LinearListViewAdapter(getActivity().getLayoutInflater(), this);
-    adapter.registerFooterView();
+    adapter.useFooterView();
     RecyclerView listview = // Assign a listview.
     listview.setAdapter(adapter);
 ```
@@ -348,8 +348,8 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 #### 3.4.3 FH 둘다 제공하는 경우
 ```java
     LinearListViewAdapter adapter = LinearListViewAdapter(getActivity().getLayoutInflater(), this);
-    adapter.registerHeaderView();
-    adapter.registerFooterView();
+    adapter.fuseHeaderView();
+    adapter.useFooterView();
     RecyclerView listview = // Assign a listview.
     listview.setAdapter(adapter);
 ```

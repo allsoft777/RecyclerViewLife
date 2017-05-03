@@ -186,12 +186,12 @@ public class LinearListViewFragment extends Fragment
 
         mAdapter = new LinearListViewAdapter(mLoadingMode, getActivity().getLayoutInflater(), this);
         if (mLoadingDirection == OptionDialogFragment.LOADING_HEADER) {
-            mAdapter.registerHeaderView();
+            mAdapter.useHeaderView();
         } else if (mLoadingDirection == OptionDialogFragment.LOADING_FOOTER) {
-            mAdapter.registerFooterView();
+            mAdapter.useFooterView();
         } else {
-            mAdapter.registerHeaderView();
-            mAdapter.registerFooterView();
+            mAdapter.useHeaderView();
+            mAdapter.useFooterView();
         }
 
         final LinearLayoutManager llm = new LinearLayoutManager(MainApplication.getAppContext());

@@ -118,17 +118,17 @@ public class AbstractRecyclerViewAdapterTest {
         TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
         TestRecyclerViewItem3 item3 = new TestRecyclerViewItem3();
 
-        adapter.addLast(item1);
+        adapter.addItemToLastPosition(item1);
         Assert.assertEquals(adapter.getItemCount(), 1);
 
-        adapter.addLast(item2);
+        adapter.addItemToLastPosition(item2);
         Assert.assertEquals(adapter.getItemCount(), 2);
         assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem2.class));
 
-        adapter.addFirst(item3);
+        adapter.addItemToFirstPosition(item3);
         assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem3.class));
 
-        adapter.addPosition(item3, 1);
+        adapter.addItem(item3, 1);
         assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem3.class));
     }
 
@@ -138,13 +138,13 @@ public class AbstractRecyclerViewAdapterTest {
 
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
         TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
-        adapter.addFirst(item1);
+        adapter.addItemToFirstPosition(item1);
         assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
 
-        adapter.replaceElement(item2, 0);
+        adapter.replaceItem(item2, 0);
         assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem2.class));
 
-        adapter.replaceElement(item1, 0);
+        adapter.replaceItem(item1, 0);
         assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
     }
 
@@ -153,7 +153,7 @@ public class AbstractRecyclerViewAdapterTest {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
 
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
-        adapter.replaceElement(item1, 1);
+        adapter.replaceItem(item1, 1);
     }
 
     @Test
@@ -165,11 +165,11 @@ public class AbstractRecyclerViewAdapterTest {
         partial.add(new TestRecyclerViewItem2());
         partial.add(new TestRecyclerViewItem3());
 
-        adapter.addFirstCollection(partial);
+        adapter.addCollectionToFirstPosition(partial);
         Assert.assertEquals(partial.size(), adapter.getItemCount());
 
         List<RecyclerViewItem> partialEmpty = new ArrayList<>();
-        adapter.addFirstCollection(partialEmpty);
+        adapter.addCollectionToFirstPosition(partialEmpty);
         Assert.assertEquals(partial.size(), adapter.getItemCount());
 
         assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
@@ -186,11 +186,11 @@ public class AbstractRecyclerViewAdapterTest {
         partial.add(new TestRecyclerViewItem2());
         partial.add(new TestRecyclerViewItem3());
 
-        adapter.addLastCollection(partial);
+        adapter.addCollectionToLastPosition(partial);
         Assert.assertEquals(partial.size(), adapter.getItemCount());
 
         List<RecyclerViewItem> partialEmpty = new ArrayList<>();
-        adapter.addLastCollection(partialEmpty);
+        adapter.addCollectionToLastPosition(partialEmpty);
         Assert.assertEquals(partial.size(), adapter.getItemCount());
 
         assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
@@ -203,10 +203,10 @@ public class AbstractRecyclerViewAdapterTest {
         MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
         TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
 
-        adapter.addPosition(item1, 0);
-        adapter.addPosition(item1, adapter.getItemCount());
+        adapter.addItem(item1, 0);
+        adapter.addItem(item1, adapter.getItemCount());
 
-        adapter.addPosition(item1, adapter.getItemCount() + 1);
+        adapter.addItem(item1, adapter.getItemCount() + 1);
     }
 
     @Test
@@ -216,9 +216,9 @@ public class AbstractRecyclerViewAdapterTest {
         TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
         TestRecyclerViewItem3 item3 = new TestRecyclerViewItem3();
 
-        adapter.addLast(item1);
-        adapter.addLast(item2);
-        adapter.addLast(item3);
+        adapter.addItemToLastPosition(item1);
+        adapter.addItemToLastPosition(item2);
+        adapter.addItemToLastPosition(item3);
 
         Assert.assertEquals(adapter.getItemCount(), 3);
         adapter.removeLastItem();
@@ -239,9 +239,9 @@ public class AbstractRecyclerViewAdapterTest {
         TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
         TestRecyclerViewItem3 item3 = new TestRecyclerViewItem3();
 
-        adapter.addLast(item1);
-        adapter.addLast(item2);
-        adapter.addLast(item3);
+        adapter.addItemToLastPosition(item1);
+        adapter.addItemToLastPosition(item2);
+        adapter.addItemToLastPosition(item3);
 
         Assert.assertEquals(adapter.getItemCount(), 3);
         adapter.removeFirstItem();
@@ -253,6 +253,25 @@ public class AbstractRecyclerViewAdapterTest {
         adapter.removeFirstItem();
         adapter.removeFirstItem();
         Assert.assertEquals(adapter.getItemCount(), 0);
+    }
+
+    @Test
+    public void testRemoveItem() throws Exception {
+        MockRecyclerViewAdapterSimple adapter = new MockRecyclerViewAdapterSimple(layoutInflater, vb1);
+        TestRecyclerViewItem1 item1 = new TestRecyclerViewItem1();
+        TestRecyclerViewItem2 item2 = new TestRecyclerViewItem2();
+        TestRecyclerViewItem3 item3 = new TestRecyclerViewItem3();
+
+        adapter.addItemToLastPosition(item1);
+        adapter.addItemToLastPosition(item2);
+        adapter.addItemToLastPosition(item3);
+
+        Assert.assertEquals(adapter.getItemCount(), 3);
+        adapter.removePosition(1, false);
+        Assert.assertEquals(adapter.getItemCount(), 2);
+
+        assertThat(adapter.getItem(0), instanceOf(TestRecyclerViewItem1.class));
+        assertThat(adapter.getItem(1), instanceOf(TestRecyclerViewItem3.class));
     }
 
     // ========================================================================

@@ -49,7 +49,7 @@ public class MockRecyclerViewAdapterWithHeaderFooterView extends RecyclerListVie
     public MockRecyclerViewAdapterWithHeaderFooterView(LayoutInflater layoutInflater) {
         super(layoutInflater);
         List<RecyclerViewItem> dataSet = new ArrayList<>();
-        addLastCollection(dataSet);
+        addCollectionToLastPosition(dataSet);
         setNotifyObservers(false);
     }
 
