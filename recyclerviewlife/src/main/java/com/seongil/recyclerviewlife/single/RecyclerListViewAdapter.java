@@ -150,7 +150,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
 
         // decide position to be inserted on DataSet.
         final int position = getItemCount();
-        addPosition((T) footerItem, position);
+        addItem((T) footerItem, position);
         mUseFooterView = true;
     }
 
@@ -166,7 +166,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
         final RecyclerViewHeaderItem headerItem = getNewInstanceOfHeaderItem();
         LibUtils.checkNotNull(headerItem, "Header View Item is null. You must override getNewInstanceOfHeaderItem()");
 
-        addPosition((T) headerItem, 0);
+        addItem((T) headerItem, 0);
         mUseHeaderView = true;
     }
 
@@ -187,7 +187,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
         final RecyclerViewFooterItem footerItem = getRecyclerFooterViewItemFromDataSet();
         LibUtils.checkNotNull(footerItem, "Footer View item is null. You must override getNewInstanceOfFooterItem()");
         footerItem.setStatusCode(code, applyOneCycle);
-        updatePositionWithNotify((T) footerItem, getItemCount() - 1);
+        replaceItem((T) footerItem, getItemCount() - 1);
     }
 
     @SuppressWarnings("unchecked")
@@ -195,7 +195,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
         final RecyclerViewHeaderItem headerItem = getRecyclerHeaderViewItemFromDataSet();
         LibUtils.checkNotNull(headerItem, "Header View item is null. You must override getNewInstanceOfHeaderItem()");
         headerItem.setStatusCode(code, applyOneCycle);
-        updatePositionWithNotify((T) headerItem, 0);
+        replaceItem((T) headerItem, 0);
     }
 
     public boolean headerViewStatusCodeIsOneCycle() {
@@ -211,7 +211,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
         final RecyclerViewHeaderItem headerItem = getRecyclerHeaderViewItemFromDataSet();
         LibUtils.checkNotNull(headerItem, "Header View item is null. You must override getNewInstanceOfHeaderItem()");
         headerItem.setApplyOneCycle(applyOneCycle);
-        updatePositionWithNotify((T) headerItem, 0);
+        replaceItem((T) headerItem, 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -219,7 +219,7 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
         final RecyclerViewFooterItem footerItem = getRecyclerFooterViewItemFromDataSet();
         LibUtils.checkNotNull(footerItem, "Footer View item is null. You must override getNewInstanceOfFooterItem()");
         footerItem.setApplyOneCycle(applyOneCycle);
-        updatePositionWithNotify((T) footerItem, getItemCount() - 1);
+        replaceItem((T) footerItem, getItemCount() - 1);
     }
 
     protected RecyclerViewHeaderItem getRecyclerHeaderViewItemFromDataSet() {

@@ -120,8 +120,12 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         return mViewBinderManager.size();
     }
 
-    @SuppressWarnings("unchecked")
     public void setData(@NonNull List<T> collection) {
+        setData(collection, mNotifyObservers);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setData(@NonNull List<T> collection, boolean notifyObservers) {
         if (registeredHeaderView()) {
             collection.add(0, (T) getHeaderItem());
         }
@@ -130,24 +134,32 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         }
         mDataSet = collection;
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemRangeChanged(0, getItemCount());
         }
     }
 
-    public void addFirstCollection(@NonNull List<T> collection) {
+    public void addCollectionToFirstPosition(@NonNull List<T> collection) {
+        addCollectionToFirstPosition(collection, mNotifyObservers);
+    }
+
+    public void addCollectionToFirstPosition(@NonNull List<T> collection, boolean notifyObservers) {
         LibUtils.checkNotNull(collection, "Collection to add on the DataSet is null.");
 
         final int targetSize = collection.size();
         final int insertPos = registeredHeaderView() ? 1 : 0;
         mDataSet.addAll(insertPos, collection);
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemRangeInserted(-targetSize, targetSize);
         }
     }
 
-    public void addLastCollection(@NonNull List<T> collection) {
+    public void addCollectionToLastPosition(@NonNull List<T> collection) {
+        addCollectionToLastPosition(collection, mNotifyObservers);
+    }
+
+    public void addCollectionToLastPosition(@NonNull List<T> collection, boolean notifyObservers) {
         LibUtils.checkNotNull(collection, "Collection to add on the DataSet is null.");
 
         final int targetSize = collection.size();
@@ -162,12 +174,16 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         }
         mDataSet.addAll(insertPos, collection);
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemRangeInserted(insertPos + 1, targetSize);
         }
     }
 
-    public void addLast(T element) {
+    public void addItemToLastPosition(T element) {
+        addItemToLastPosition(element, mNotifyObservers);
+    }
+
+    public void addItemToLastPosition(T element, boolean notifyObservers) {
         int insertionPos;
         if (registeredFooterView()) {
             insertionPos = getItemCount() == 0 ? 0 : getItemCount() - 1;
@@ -177,12 +193,16 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
             mDataSet.add(insertionPos, element);
         }
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemInserted(insertionPos);
         }
     }
 
-    public void addFirst(T element) {
+    public void addItemToFirstPosition(T element) {
+        addItemToFirstPosition(element, mNotifyObservers);
+    }
+
+    public void addItemToFirstPosition(T element, boolean notifyObservers) {
         int insertionPos;
         if (registeredHeaderView()) {
             insertionPos = getItemCount() == 0 ? 0 : 1;
@@ -191,23 +211,46 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         }
         mDataSet.add(insertionPos, element);
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemInserted(insertionPos);
         }
     }
 
-    public void addPosition(T element, int position) {
+    public void addItem(T element, int position) {
+        addItem(element, position, mNotifyObservers);
+    }
+
+    public void addItem(T element, int position, boolean notifyObservers) {
         if (position < 0 || position > getItemCount()) {
             throw new IndexOutOfBoundsException("Position is invalid. : " + position);
         }
         mDataSet.add(position, element);
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemInserted(position);
         }
     }
 
+    public void replaceItem(T element, int position) {
+        replaceItem(element, position, mNotifyObservers);
+    }
+
+    public void replaceItem(T element, int position, boolean notifyObservers) {
+        if (position < 0 || position >= getItemCount()) {
+            throw new IndexOutOfBoundsException("Position is invalid. : " + position);
+        }
+        mDataSet.set(position, element);
+
+        if (notifyObservers) {
+            notifyItemChanged(position);
+        }
+    }
+
     public void removeLastItem() {
+        removeLastItem(mNotifyObservers);
+    }
+
+    public void removeLastItem(boolean notifyObservers) {
         if (getItemCount() == 0) {
             return;
         }
@@ -215,26 +258,25 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         final int removeItemPos = getItemCount() - 1;
         mDataSet.remove(removeItemPos);
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemRemoved(removeItemPos);
         }
     }
 
     public void removeFirstItem() {
+        removeFirstItem(mNotifyObservers);
+    }
+
+    public void removeFirstItem(boolean notifyObservers) {
         if (getItemCount() == 0) {
             return;
         }
 
         mDataSet.remove(0);
 
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemRemoved(0);
         }
-    }
-
-    public void updatePositionWithNotify(T element, int position) {
-        mDataSet.set(position, element);
-        notifyItemChanged(position);
     }
 
     public void clearDataSet() {
@@ -274,17 +316,6 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         removeFirstItem();
     }
 
-    public void replaceElement(T element, int position) {
-        if (getItemCount() <= position || position < 0) {
-            throw new IndexOutOfBoundsException("Position is invalid : " + position);
-        }
-        mDataSet.set(position, element);
-
-        if (mNotifyObservers) {
-            notifyItemChanged(position);
-        }
-    }
-
     public RecyclerViewHeaderItem getHeaderItem() {
         if (getItemCount() == 0) {
             throw new AssertionError("Data size is 0.");
@@ -310,21 +341,29 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
     }
 
     public void replaceHeaderItem(T element) {
+        replaceHeaderItem(element, mNotifyObservers);
+    }
+
+    public void replaceHeaderItem(T element, boolean notifyObservers) {
         if (getItemCount() == 0 || !registeredHeaderView()) {
             throw new AssertionError("There is no header item to replace with the given item.");
         }
         mDataSet.set(0, element);
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemChanged(0);
         }
     }
 
     public void replaceFooterItem(T element) {
+        replaceFooterItem(element, mNotifyObservers);
+    }
+
+    public void replaceFooterItem(T element, boolean notifyObservers) {
         if (getItemCount() == 0 || !registeredFooterView()) {
             throw new AssertionError("There is no footer item to replace with the given item.");
         }
         mDataSet.set(getItemCount() - 1, element);
-        if (mNotifyObservers) {
+        if (notifyObservers) {
             notifyItemChanged(getItemCount() - 1);
         }
     }

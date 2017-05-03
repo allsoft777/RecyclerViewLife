@@ -261,7 +261,7 @@ public class LinearListViewFragment extends Fragment
         if (mAdapter.headerViewStatusCodeIsOneCycle()) {
             mAdapter.updateHeaderViewStatusCodeForOneCycle(false);
         }
-        mAdapter.addFirstCollection(result);
+        mAdapter.addCollectionToFirstPosition(result);
     }
 
     @SuppressWarnings("unchecked")
@@ -281,7 +281,7 @@ public class LinearListViewFragment extends Fragment
         }
 
         if (result != null) {
-            mAdapter.addLastCollection(result);
+            mAdapter.addCollectionToLastPosition(result);
         }
     }
 

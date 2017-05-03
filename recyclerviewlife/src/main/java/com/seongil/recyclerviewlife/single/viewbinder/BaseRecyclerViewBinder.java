@@ -41,7 +41,7 @@ public interface BaseRecyclerViewBinder {
     /**
      * Checks the given position of the data set is correct or not.
      *
-     * @param recyclerViewItem Target recyclerview item.
+     * @param recyclerViewItem domain class used to the recycle view.
      *
      * @return true, if this DataSet is responsible, otherwise false
      */
