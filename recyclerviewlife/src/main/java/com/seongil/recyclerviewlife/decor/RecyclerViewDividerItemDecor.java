@@ -29,7 +29,6 @@ import android.view.View;
  * @author seong-il, kim
  * @since 17. 3. 21
  */
-@SuppressWarnings("unused")
 public class RecyclerViewDividerItemDecor extends RecyclerView.ItemDecoration {
 
     // ========================================================================

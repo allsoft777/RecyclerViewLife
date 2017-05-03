@@ -52,7 +52,7 @@ public class ViewBinderListManager {
 
     public ViewBinderListManager(final int capacity) {
         if (capacity < 0) {
-            throw new IllegalArgumentException("capacity < 0: " + capacity);
+            throw new IllegalArgumentException("Capacity should be bigger than 0. : " + capacity);
         }
 
         mViewBinderList = new SparseArrayCompat<>(capacity);
@@ -78,15 +78,13 @@ public class ViewBinderListManager {
 
         final int viewType = viewBinder.getItemViewType();
         if (existViewBinder(viewBinder)) {
-            StringBuilder sb = new StringBuilder(1024);
-            sb.append(
-                  LOG_PREFIX + "ViewBinder is been registered in ViewBinderList already. type : " + viewType + '\n');
+            String log = LOG_PREFIX + "ViewBinder is been registered in ViewBinderList already. type : " + viewType + '\n';
             if (viewType == AbstractViewBinder.RECYCLER_HEADER_VIEW_TYPE) {
-                sb.append("Requested ViewType is HeaderView type. So, you have to use another type value.");
+                log += "Requested ViewType is HeaderView type. So, you have to use another type value.";
             } else if (viewType == AbstractViewBinder.RECYCLER_FOOTER_VIEW_TYPE) {
-                sb.append("Requested ViewType is FooterView type. So, you have to use another type value.");
+                log += "Requested ViewType is FooterView type. So, you have to use another type value.";
             }
-            throw new IllegalArgumentException(TAG + sb);
+            throw new IllegalArgumentException(TAG + log);
         }
         mViewBinderList.put(viewType, viewBinder);
         return true;

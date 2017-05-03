@@ -140,7 +140,6 @@ public abstract class RecyclerListViewAdapter<T extends RecyclerViewItem>
         final RecyclerViewFooterItem footerItem = getNewInstanceOfFooterItem();
         LibUtils.checkNotNull(footerItem, "Footer View item is null. You must override getNewInstanceOfFooterItem()");
 
-        // decide position to be inserted on DataSet.
         final int position = getItemCount();
         addItem((T) footerItem, position);
         mUseFooterView = true;

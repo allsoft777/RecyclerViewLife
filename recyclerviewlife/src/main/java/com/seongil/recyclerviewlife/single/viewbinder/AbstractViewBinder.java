@@ -45,9 +45,6 @@ public abstract class AbstractViewBinder implements ViewBinder {
      */
     public static final int RECYCLER_FOOTER_VIEW_TYPE = 1001;
 
-    // TODO implementation
-    public static final int RECYCLER_GROUP_VIEW_TYPE = 1002;
-
     // ========================================================================
     // Fields
     // ========================================================================
