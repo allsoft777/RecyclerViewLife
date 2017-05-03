@@ -44,7 +44,7 @@ Usage
 ##### Gradle
 ```groovy
 dependencies {
-    compile 'com.seongil:recyclerviewlife:1.0.3'
+    compile 'com.seongil:recyclerviewlife:1.0.4'
 }
 ```
 ##### Maven
@@ -52,7 +52,7 @@ dependencies {
 <dependency>
     <groupId>com.seongil</groupId>
     <artifactId>recyclerviewlife</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <type>pom</type>
 </dependency>
 ```
@@ -77,7 +77,7 @@ public class TitleDateItem implements RecyclerViewItem {
 <a id="simple_listview_viewbinder"></a>
 #### 2.2 ViewBinder 구현
 
-각 모델을 화면에 rendering하는 ViewBinder를 구현하기 위하여 AbstractViewBinder 를 상속받아서 구현체를 만들고 내부적으로 해당 view에 해당하는 ViewHolder를 구현한다.
+각 모델을 화면에 렌더링하는 ViewBinder를 구현하기 위하여 AbstractViewBinder 를 상속받아서 구현체를 만들고 내부적으로 해당 view에 해당하는 ViewHolder를 구현한다.
 
 ```java
 public class LinearListTwoTextViewBinder extends AbstractViewBinder {
@@ -348,7 +348,7 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 #### 3.4.3 FH 둘다 제공하는 경우
 ```java
     LinearListViewAdapter adapter = LinearListViewAdapter(getActivity().getLayoutInflater(), this);
-    adapter.fuseHeaderView();
+    adapter.useHeaderView();
     adapter.useFooterView();
     RecyclerView listview = // Assign a listview.
     listview.setAdapter(adapter);
@@ -367,28 +367,7 @@ RecyclerView를 configuration하는 caller쪽에서 어떻게 사용하는지 �
 <a id="fh_adapter_api"></a>
 
 ### 4. LinearListViewAdapter api
-
-| api | 설명 |
-| :--- |:--- |
-| void setNotifyObservers(boolean mNotifyObservers)| Data가 변경되었을때 등록된 observer들에게 통지 할 것 인지를 설정하기 위한 api |
-| List<T> getDataSet() | adapter가 가지고 있는 DataSet을 반환한다. |
-| void setData(List<T> collection) | adapter의 DataSet을 인자와 교체한다. |
-| public void clearDataSet() | adapter의 DataSet을 clear한다. |
-| void addFirstCollection(List<T> collection) | adapter가 가지고 있는 DataSet의 앞쪽에 list를 추가한다. |
-| public void addFirst(T element) | adapter가 가지고 있는 DataSet의 앞쪽에 element를 추가한다. |
-| void addLastCollection(List<T> collection) | adapter가 가지고 있는 DataSet의 마지막에 list를 추가한다. |
-| void addLast(T element) | adapter가 가지고 있는 DataSet의 마지막에 element를 추가한다. |
-| void addPosition(T element, int position) | adapter가 가지고 있는 DataSet의 position 위치에 element를 추가한다. |
-| void removeLastItem() | adapter가 가지고 있는 DataSet의 마지막 항목을 삭제한다. |
-| void removeFirstItem() | adapter가 가지고 있는 DataSet의 첫번째 항목을 삭제한다. |
-| void updatePositionWithNotify(T element, int position) | setNotifyObservers를 통하여 notifyObservers가 false로 assign 되어 있더라도<br> 이 api를 통하여 특정 position의 element를 업데이트하고 등록된 observer에 통지한다. |
-| void replaceElement(int position, T element) | adapter가 가지고 있는 DataSet의 position에 있는 항목을 element로 교체한다.<br> 등록된 observer에 통지하지는 않는다. |
-| RecyclerViewHeaderItem getHeaderItem() | adapter가 가지고 있는 DataSet의 header item을 반환한다. |
-| RecyclerViewFooterItem getFooterItem() | adapter가 가지고 있는 DataSet의 footer item을 반환한다. |
-| void replaceHeaderItem(T element) | adapter가 가지고 있는 DataSet의 header item을 교체한다. |
-| void replaceFooterItem(T element) | adapter가 가지고 있는 DataSet의 footer item을 교체한다. |
-| T getItem(int position) | adapter가 가지고 있는 DataSet의 position 위치에 있는 항목을 반환한다. |
-
+파일 참고.
 
 License
 -------
