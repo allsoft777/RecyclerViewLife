@@ -46,7 +46,8 @@ public class RecyclerListViewAdapterTest {
     // ========================================================================
     // fields
     // ========================================================================
-    @Mock LayoutInflater mLayoutInflater;
+    @Mock
+    LayoutInflater mLayoutInflater;
 
     // ========================================================================
     // constructors
@@ -103,6 +104,26 @@ public class RecyclerListViewAdapterTest {
         adapter.setData(list);
         Assert.assertEquals(adapter.getDataSet().size(), 2);
         Assert.assertTrue(adapter.getItem(0) instanceof MockHeaderViewItem);
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testGetDataSetApi() throws Exception {
+        MockRecyclerListViewAdapter adapter = new MockRecyclerListViewAdapter(mLayoutInflater);
+        adapter.useHeaderView();
+
+        List<RecyclerViewItem> list = new ArrayList<>();
+        list.add(new TestRecyclerViewItem1());
+        list.add(new TestRecyclerViewItem2());
+        adapter.addCollectionToLastPosition(list);
+
+        List<RecyclerViewItem> allDataSet = adapter.getDataSet();
+        Assert.assertEquals(allDataSet.size(), 3);
+        Assert.assertTrue(allDataSet.get(0) instanceof MockHeaderViewItem);
+
+        allDataSet = adapter.getDataSet(false);
+        Assert.assertEquals(allDataSet.size(), 2);
+        Assert.assertTrue(!(allDataSet.get(0) instanceof MockHeaderViewItem));
     }
 
     // ========================================================================

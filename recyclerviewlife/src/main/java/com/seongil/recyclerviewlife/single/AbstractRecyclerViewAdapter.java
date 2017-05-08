@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import com.seongil.recyclerviewlife.LibUtils;
 import com.seongil.recyclerviewlife.RecyclerListViewListener;
 import com.seongil.recyclerviewlife.model.RecyclerViewFooterItem;
+import com.seongil.recyclerviewlife.model.RecyclerViewHeaderFooterItem;
 import com.seongil.recyclerviewlife.model.RecyclerViewHeaderItem;
 import com.seongil.recyclerviewlife.model.common.RecyclerViewItem;
 import com.seongil.recyclerviewlife.single.viewbinder.AbstractViewBinder;
@@ -63,11 +64,6 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
     // ========================================================================
     // Getter & Setter
     // ========================================================================
-    @SuppressWarnings("unchecked")
-    public List<T> getDataSet() {
-        return mDataSet;
-    }
-
     public void setNotifyObservers(boolean notifyObservers) {
         mNotifyObservers = notifyObservers;
     }
@@ -389,6 +385,25 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
 
     public T getItem(int position) {
         return mDataSet.get(position);
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<T> getDataSet() {
+        return getDataSet(true);
+    }
+
+    public List<T> getDataSet(final boolean includeHeaderFooterItem) {
+        if (includeHeaderFooterItem) {
+            return mDataSet;
+        }
+        final List<T> result = new ArrayList<>();
+        for (T item : mDataSet) {
+            if (item instanceof RecyclerViewHeaderFooterItem) {
+                continue;
+            }
+            result.add(item);
+        }
+        return result;
     }
 
     // ========================================================================
