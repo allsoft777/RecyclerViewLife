@@ -290,7 +290,7 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
 
         mDataSet.remove(position);
         if (notifyToObservers) {
-            notifyItemChanged(position);
+            notifyItemRemoved(position);
         }
     }
 
