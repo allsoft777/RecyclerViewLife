@@ -126,6 +126,27 @@ public class RecyclerListViewAdapterTest {
         Assert.assertTrue(!(allDataSet.get(0) instanceof MockHeaderViewItem));
     }
 
+    @Test
+    @SuppressWarnings("unchecked")
+    public void itemCountTest() throws Exception {
+        MockRecyclerListViewAdapter adapter = new MockRecyclerListViewAdapter(mLayoutInflater);
+        adapter.useHeaderView();
+
+        List<RecyclerViewItem> list = new ArrayList<>();
+        list.add(new TestRecyclerViewItem1());
+        list.add(new TestRecyclerViewItem2());
+        adapter.addCollectionToLastPosition(list);
+
+        Assert.assertEquals(adapter.getItemCount(false), 2);
+        Assert.assertEquals(adapter.getItemCount(true), 3);
+        Assert.assertEquals(adapter.getItemCount(), 3);
+
+        adapter.useFooterView();
+        Assert.assertEquals(adapter.getItemCount(false), 2);
+        Assert.assertEquals(adapter.getItemCount(true), 4);
+        Assert.assertEquals(adapter.getItemCount(), 4);
+    }
+
     // ========================================================================
     // inner and anonymous classes
     // ========================================================================

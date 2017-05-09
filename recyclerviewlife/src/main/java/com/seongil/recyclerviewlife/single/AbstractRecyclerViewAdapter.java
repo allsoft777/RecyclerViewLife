@@ -88,12 +88,26 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
 
     @Override
     public int getItemCount() {
-        return mDataSet.size();
+        return getItemCount(true);
     }
 
     // ========================================================================
     // Methods
     // ========================================================================
+    public int getItemCount(final boolean withHeaderFooterItem) {
+        int size = mDataSet.size();
+        if (withHeaderFooterItem) {
+            return size;
+        }
+        if (registeredHeaderView()) {
+            size--;
+        }
+        if (registeredFooterView()) {
+            size--;
+        }
+        return size;
+    }
+
     protected void clearViewBinders() {
         mViewBinderManager.clear();
     }
@@ -312,7 +326,7 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
             }
             if (registeredFooterView()) {
                 notifyItemCount = size - 1;
-                if(registeredHeaderView()) {
+                if (registeredHeaderView()) {
                     notifyItemCount--;
                 }
                 if (notifyItemCount < 0) {
