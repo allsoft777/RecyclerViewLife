@@ -295,11 +295,36 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
     }
 
     public void clearDataSet() {
-        final int size = getItemCount();
-        mDataSet.clear();
+        clearDataSet(false, true);
+    }
 
-        if (mNotifyObservers) {
-            notifyItemRangeRemoved(0, size);
+    public void clearDataSet(final boolean withHeaderFooterItem, final boolean notifyToObservers) {
+        final int size = getItemCount();
+        int startPos = 0, endPos = size - 1;
+
+        if (withHeaderFooterItem) {
+            mDataSet.clear();
+        } else {
+            List<T> list = new ArrayList<>();
+            if (registeredHeaderView()) {
+                startPos = 1;
+                list.add(mDataSet.get(0));
+            }
+            if (registeredFooterView()) {
+                endPos = size - 2;
+                if (endPos < 0) {
+                    endPos = 0;
+                }
+                list.add(mDataSet.get(size - 1));
+            }
+            mDataSet = list;
+        }
+        if (endPos < 0) {
+            endPos = 0;
+        }
+
+        if (notifyToObservers) {
+            notifyItemRangeRemoved(startPos, endPos);
         }
     }
 
@@ -392,8 +417,8 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
         return getDataSet(true);
     }
 
-    public List<T> getDataSet(final boolean includeHeaderFooterItem) {
-        if (includeHeaderFooterItem) {
+    public List<T> getDataSet(final boolean withHeaderFooterItem) {
+        if (withHeaderFooterItem) {
             return mDataSet;
         }
         final List<T> result = new ArrayList<>();
