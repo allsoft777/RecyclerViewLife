@@ -300,7 +300,7 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
 
     public void clearDataSet(final boolean withHeaderFooterItem, final boolean notifyToObservers) {
         final int size = getItemCount();
-        int startPos = 0, endPos = size - 1;
+        int startPos = 0, notifyItemCount = size;
 
         if (withHeaderFooterItem) {
             mDataSet.clear();
@@ -311,20 +311,23 @@ public abstract class AbstractRecyclerViewAdapter<T extends RecyclerViewItem>
                 list.add(mDataSet.get(0));
             }
             if (registeredFooterView()) {
-                endPos = size - 2;
-                if (endPos < 0) {
-                    endPos = 0;
+                notifyItemCount = size - 1;
+                if(registeredHeaderView()) {
+                    notifyItemCount--;
+                }
+                if (notifyItemCount < 0) {
+                    notifyItemCount = 0;
                 }
                 list.add(mDataSet.get(size - 1));
             }
             mDataSet = list;
         }
-        if (endPos < 0) {
-            endPos = 0;
+        if (notifyItemCount < 0) {
+            notifyItemCount = 0;
         }
 
         if (notifyToObservers) {
-            notifyItemRangeRemoved(startPos, endPos);
+            notifyItemRangeRemoved(startPos, notifyItemCount);
         }
     }
 
