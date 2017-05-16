@@ -24,7 +24,7 @@ RecyclerView를 활용하여 리스트뷰를 구현할때 사용되는 많은 Fr
 ##### Gradle
 ```groovy
 dependencies {
-    compile 'com.seongil:recyclerviewlife:1.0.4'
+    compile 'com.seongil:recyclerviewlife:1.0.6'
 }
 ```
 ##### Maven
@@ -32,7 +32,7 @@ dependencies {
 <dependency>
     <groupId>com.seongil</groupId>
     <artifactId>recyclerviewlife</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.6</version>
     <type>pom</type>
 </dependency>
 ```
